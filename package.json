@@ -2,26 +2,22 @@
   "name": "gridsense-iq",
   "version": "0.1.0",
   "private": true,
-  "packageManager": "pnpm@10.33.2",
-  "description": "GridSense IQ energy monitoring and management prototype with React dashboard and Express mock hardware API.",
+  "description": "GridSense IQ energy monitoring and management prototype with a Vite frontend and Vercel serverless API.",
   "type": "module",
   "scripts": {
-    "client": "vite --host 127.0.0.1 --port 5173",
-    "server": "node server/index.js",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "dev": "vite --host 127.0.0.1 --port 5173",
     "build": "vite build",
     "preview": "vite preview --host 127.0.0.1 --port 4173"
   },
   "dependencies": {
-    "@tailwindcss/postcss": "^4.1.16",
-    "@vitejs/plugin-react": "^5.1.0",
-    "concurrently": "^9.2.1",
-    "cors": "^2.8.6",
-    "express": "^5.2.1",
     "lucide-react": "^0.468.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "recharts": "^3.3.0",
+    "recharts": "^3.3.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.16",
+    "@vitejs/plugin-react": "^5.1.0",
     "tailwindcss": "^4.1.16",
     "vite": "^7.2.6"
   }

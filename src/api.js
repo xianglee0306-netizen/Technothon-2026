@@ -20,42 +20,27 @@ async function fetchJson(path, options = {}) {
 }
 
 export async function getMeta() {
-  return fetchJson("/api/meta");
+  const dashboard = await fetchJson("/api/dashboard");
+  return dashboard.meta;
 }
 
 export async function getDashboard(mode, range) {
-  const query = new URLSearchParams({ mode });
-  const trendQuery = new URLSearchParams({ mode, range });
-
-  const [summary, trends, devices, recommendations, notifications, settings] = await Promise.all([
-    fetchJson(`/api/energy/summary?${query}`),
-    fetchJson(`/api/energy/trends?${trendQuery}`),
-    fetchJson(`/api/energy/devices?${query}`),
-    fetchJson(`/api/recommendations?${query}`),
-    fetchJson(`/api/notifications?${query}`),
-    fetchJson(`/api/settings?${query}`)
-  ]);
-
-  return {
-    summary,
-    trends,
-    devices,
-    recommendations,
-    notifications,
-    settings
-  };
+  const query = new URLSearchParams({ mode, range });
+  const dashboard = await fetchJson(`/api/dashboard?${query}`);
+  const { meta, ...dashboardData } = dashboard;
+  return dashboardData;
 }
 
 export async function saveSettings(mode, settings) {
-  return fetchJson("/api/settings", {
+  return fetchJson("/api/dashboard", {
     method: "POST",
-    body: JSON.stringify({ mode, settings })
+    body: JSON.stringify({ action: "save-settings", mode, settings })
   });
 }
 
 export async function controlDevice(mode, deviceId, action) {
-  return fetchJson("/api/control/device", {
+  return fetchJson("/api/dashboard", {
     method: "POST",
-    body: JSON.stringify({ mode, deviceId, action })
+    body: JSON.stringify({ action: "control-device", mode, deviceId, deviceAction: action })
   });
 }

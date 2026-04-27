@@ -1,6 +1,6 @@
 # GridSense IQ
 
-GridSense IQ is a mobile-friendly prototype for an energy efficiency competition. It demonstrates a smart-hardware-connected monitoring and management platform for Residential / SME and Enterprise / Industrial users, with the enterprise dashboard treated as the primary operational experience.
+GridSense IQ is a mobile-friendly prototype for an energy efficiency competition. It uses a Vite React frontend and a Vercel serverless API.
 
 ## App Name Options
 
@@ -19,12 +19,13 @@ gridsense-iq/
   index.html
   package.json
   postcss.config.js
+  vercel.json
   vite.config.js
+  api/
+    _data.js
+    dashboard.js
   public/
     favicon.svg
-  server/
-    index.js
-    mockData.js
   src/
     App.jsx
     api.js
@@ -46,18 +47,11 @@ gridsense-iq/
       ui.jsx
 ```
 
-## API Routes
+## API Route
 
-- `GET /api/health`
-- `GET /api/meta`
-- `GET /api/energy/summary?mode=enterprise`
-- `GET /api/energy/trends?mode=enterprise&range=daily`
-- `GET /api/energy/devices?mode=enterprise`
-- `GET /api/recommendations?mode=enterprise`
-- `GET /api/notifications?mode=enterprise`
-- `GET /api/settings?mode=enterprise`
-- `POST /api/settings`
-- `POST /api/control/device`
+- `GET /api/dashboard?mode=enterprise&range=daily`
+- `POST /api/dashboard` with `action: "save-settings"`
+- `POST /api/dashboard` with `action: "control-device"`
 
 Use `mode=enterprise` or `mode=residential`.
 
@@ -68,14 +62,7 @@ npm install
 npm run dev
 ```
 
-The React app runs at `http://127.0.0.1:5173` and the Express API runs at `http://127.0.0.1:4000`.
-
-If npm has trouble on your machine, use Corepack with pnpm:
-
-```bash
-corepack pnpm install
-corepack pnpm dev
-```
+The React app and local API route run at `http://127.0.0.1:5173`.
 
 To create a production build:
 
