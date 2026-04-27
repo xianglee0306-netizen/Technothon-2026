@@ -9,7 +9,7 @@ export function formatEnergy(value) {
 }
 
 export function formatCurrency(value, currency = "USD") {
-  return new Intl.NumberFormat("en-US", {
+  return new Intl.NumberFormat(currency === "MYR" ? "en-MY" : "en-US", {
     style: "currency",
     currency,
     maximumFractionDigits: value >= 1000 ? 0 : 2

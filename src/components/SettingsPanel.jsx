@@ -18,6 +18,8 @@ function createForm(settings) {
     energySavingTarget: settings?.energySavingTarget ?? 0,
     co2ReductionTargetKg: settings?.co2ReductionTargetKg ?? 0,
     notificationTime: settings?.notificationTime ?? "08:00",
+    morningNotificationTime: settings?.morningNotificationTime ?? settings?.notificationTime ?? "08:00",
+    nightNotificationTime: settings?.nightNotificationTime ?? "21:30",
     notificationPreference: settings?.notificationPreference ?? "Smart reminders",
     automationPreference: settings?.automationPreference ?? "Suggest Only",
     categories: listToText(settings?.categories),
@@ -53,6 +55,8 @@ export default function SettingsPanel({ open, mode, settings, onClose, onSave })
       energySavingTarget: Number(form.energySavingTarget),
       co2ReductionTargetKg: Number(form.co2ReductionTargetKg),
       notificationTime: form.notificationTime,
+      morningNotificationTime: form.morningNotificationTime,
+      nightNotificationTime: form.nightNotificationTime,
       notificationPreference: form.notificationPreference,
       automationPreference: form.automationPreference,
       categories: textToList(form.categories),
@@ -89,7 +93,7 @@ export default function SettingsPanel({ open, mode, settings, onClose, onSave })
 
         <div className="grid gap-4 px-4 py-5 sm:grid-cols-2 sm:px-5">
           <label className="space-y-2">
-            <span className="text-sm font-semibold text-slate-200">Tariff rate per kWh</span>
+            <span className="text-sm font-semibold text-slate-200">Tariff rate (RM/kWh)</span>
             <input
               type="number"
               min="0"
@@ -124,11 +128,21 @@ export default function SettingsPanel({ open, mode, settings, onClose, onSave })
           </label>
 
           <label className="space-y-2">
-            <span className="text-sm font-semibold text-slate-200">Notification time</span>
+            <span className="text-sm font-semibold text-slate-200">Morning notification time</span>
             <input
               type="time"
-              value={form.notificationTime}
-              onChange={(event) => updateField("notificationTime", event.target.value)}
+              value={form.morningNotificationTime}
+              onChange={(event) => updateField("morningNotificationTime", event.target.value)}
+              className="w-full rounded-xl border border-white/10 bg-white/5 px-3 py-2.5 text-sm text-white outline-none transition focus:border-cyan-300/60 focus:ring-2 focus:ring-cyan-300/15"
+            />
+          </label>
+
+          <label className="space-y-2">
+            <span className="text-sm font-semibold text-slate-200">Night notification time</span>
+            <input
+              type="time"
+              value={form.nightNotificationTime}
+              onChange={(event) => updateField("nightNotificationTime", event.target.value)}
               className="w-full rounded-xl border border-white/10 bg-white/5 px-3 py-2.5 text-sm text-white outline-none transition focus:border-cyan-300/60 focus:ring-2 focus:ring-cyan-300/15"
             />
           </label>

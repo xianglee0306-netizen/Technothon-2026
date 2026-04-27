@@ -1,16 +1,20 @@
-# GridSense IQ
+# GridSenseIQ
 
-GridSense IQ is a mobile-friendly prototype for an energy efficiency competition. It uses a Vite React frontend and a Vercel serverless API.
+GridSenseIQ is a mobile-friendly smart energy monitoring prototype for an energy efficiency competition.
+
+**Tagline:** AI-Powered Energy Intelligence for Smarter Buildings
+
+It uses a Vite React frontend, a Vercel-style serverless API, Recharts, mock energy data, and localStorage for demo authentication, energy profiles, profile selection, settings, and dashboard customization.
 
 ## App Name Options
 
-1. GridSense IQ
+1. GridSenseIQ
 2. WattWise Operations
 3. EcoGrid Sentinel
 4. Enervise Control
 5. CarbonFlux Monitor
 
-**Selected name:** GridSense IQ
+**Selected name:** GridSenseIQ
 
 ## Project Structure
 
@@ -49,11 +53,13 @@ gridsense-iq/
 
 ## API Route
 
-- `GET /api/dashboard?mode=enterprise&range=daily`
+- `GET /api/dashboard?profileType=enterprise&range=hourly`
+- `GET /api/dashboard?mode=residential&range=monthly`
 - `POST /api/dashboard` with `action: "save-settings"`
 - `POST /api/dashboard` with `action: "control-device"`
 
-Use `mode=enterprise` or `mode=residential`.
+Use `profileType=enterprise` / `mode=enterprise` or `profileType=residential` / `mode=residential`.
+Supported ranges are `hourly`, `daily`, `weekly`, and `monthly`.
 
 ## Run Locally
 

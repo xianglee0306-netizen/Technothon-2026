@@ -12,10 +12,10 @@ function getUrl(req) {
 }
 
 function getMode(input = {}) {
-  const mode = input.mode || "enterprise";
+  const mode = input.mode || input.profileType || "enterprise";
 
   if (!store[mode]) {
-    const error = new Error(`Unsupported mode "${mode}". Use "enterprise" or "residential".`);
+    const error = new Error(`Unsupported profile type "${mode}". Use "enterprise" or "residential".`);
     error.statusCode = 400;
     throw error;
   }
@@ -56,7 +56,7 @@ function dashboardPayload(mode, range) {
   const trends = store[mode].trends[range];
 
   if (!trends) {
-    const error = new Error(`Unsupported range "${range}". Use daily, weekly, or monthly.`);
+    const error = new Error(`Unsupported range "${range}". Use hourly, daily, weekly, or monthly.`);
     error.statusCode = 400;
     throw error;
   }
@@ -152,7 +152,7 @@ async function controlDevice(body) {
       ...device,
       costContribution: money(device.usageKwh * Number(store[mode].settings.tariffRate))
     },
-    safetyNote: "Prototype control only. Real deployment requires hardware validation and safety authorization."
+    safetyNote: "Prototype control only. Real deployment requires hardware validation, electrical safety approval, and authorized personnel."
   };
 }
 

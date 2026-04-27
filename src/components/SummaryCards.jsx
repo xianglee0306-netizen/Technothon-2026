@@ -1,47 +1,56 @@
-import { Activity, Cloud, DollarSign, Gauge, TrendingDown, TrendingUp, Zap } from "lucide-react";
+import { AlertTriangle, DollarSign, Gauge, TrendingDown, TrendingUp, Zap } from "lucide-react";
 import { formatCurrency, formatEnergy, formatPercent } from "./ui.jsx";
 
-export default function SummaryCards({ summary }) {
+export const summaryCardOptions = [
+  { key: "energy", label: "Energy Today" },
+  { key: "cost", label: "Estimated Cost" },
+  { key: "efficiency", label: "Efficiency Score" },
+  { key: "alerts", label: "Active Alerts" }
+];
+
+export default function SummaryCards({ summary, activeAlerts = 0, cardOrder = summaryCardOptions.map((item) => item.key) }) {
   if (!summary) return null;
 
-  const cards = [
-    {
-      title: "Energy today",
+  const cards = {
+    energy: {
+      title: "Energy Today",
       value: formatEnergy(summary.totalEnergyKwh),
       detail: `${formatPercent(summary.comparison.yesterday)} vs yesterday`,
       icon: Zap,
       positiveIsGood: false,
       delta: summary.comparison.yesterday
     },
-    {
-      title: "Estimated cost",
+    cost: {
+      title: "Estimated Cost",
       value: formatCurrency(summary.estimatedCost, summary.currency),
       detail: `${formatPercent(summary.comparison.lastWeek)} vs last week`,
       icon: DollarSign,
       positiveIsGood: false,
       delta: summary.comparison.lastWeek
     },
-    {
-      title: "Carbon emission",
-      value: `${Math.round(summary.carbonKg).toLocaleString()} kg`,
-      detail: `${formatPercent(summary.comparison.monthlyAverage)} vs monthly avg`,
-      icon: Cloud,
-      positiveIsGood: false,
-      delta: summary.comparison.monthlyAverage
-    },
-    {
-      title: "Efficiency score",
+    efficiency: {
+      title: "Efficiency Score",
       value: `${summary.efficiencyScore}/100`,
       detail: "Higher score means less waste",
       icon: Gauge,
       positiveIsGood: true,
       delta: summary.efficiencyScore - 75
+    },
+    alerts: {
+      title: "Active Alerts",
+      value: `${activeAlerts}`,
+      detail: activeAlerts > 0 ? "Needs review today" : "All clear",
+      icon: AlertTriangle,
+      positiveIsGood: false,
+      delta: activeAlerts
     }
-  ];
+  };
+
+  const orderedCards = cardOrder.map((key) => cards[key]).filter(Boolean);
 
   return (
     <section className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4" aria-label="Energy summary">
-      {cards.map((card) => {
+      {orderedCards.map((card) => {
         const Icon = card.icon;
         const TrendIcon = card.delta <= 0 ? TrendingDown : TrendingUp;
         const good = card.positiveIsGood ? card.delta >= 0 : card.delta <= 0;

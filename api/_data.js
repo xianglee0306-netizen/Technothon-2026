@@ -1,7 +1,8 @@
 export const appMeta = {
-  selectedName: "GridSense IQ",
+  selectedName: "GridSenseIQ",
+  tagline: "AI-Powered Energy Intelligence for Smarter Buildings",
   nameOptions: [
-    "GridSense IQ",
+    "GridSenseIQ",
     "WattWise Operations",
     "EcoGrid Sentinel",
     "Enervise Control",
@@ -24,10 +25,12 @@ export const appMeta = {
 export const mockData = {
   residential: {
     settings: {
-      tariffRate: 0.31,
-      currency: "USD",
+      tariffRate: 0.57,
+      currency: "MYR",
       energySavingTarget: 18,
       co2ReductionTargetKg: 90,
+      morningNotificationTime: "07:45",
+      nightNotificationTime: "21:30",
       notificationTime: "21:30",
       notificationPreference: "Smart reminders",
       automationPreference: "Suggest Only",
@@ -55,7 +58,7 @@ export const mockData = {
       }
     },
     trends: {
-      daily: [
+      hourly: [
         { label: "00:00", kwh: 1.2, baseline: 1.5 },
         { label: "03:00", kwh: 0.8, baseline: 1.1 },
         { label: "06:00", kwh: 2.1, baseline: 2.4 },
@@ -65,7 +68,7 @@ export const mockData = {
         { label: "18:00", kwh: 9.3, baseline: 8.1 },
         { label: "21:00", kwh: 7.8, baseline: 7.1 }
       ],
-      weekly: [
+      daily: [
         { label: "Mon", kwh: 39, baseline: 43 },
         { label: "Tue", kwh: 41, baseline: 44 },
         { label: "Wed", kwh: 46, baseline: 43 },
@@ -74,11 +77,17 @@ export const mockData = {
         { label: "Sat", kwh: 52, baseline: 47 },
         { label: "Sun", kwh: 42.8, baseline: 45 }
       ],
-      monthly: [
+      weekly: [
         { label: "Week 1", kwh: 286, baseline: 302 },
         { label: "Week 2", kwh: 301, baseline: 318 },
         { label: "Week 3", kwh: 284, baseline: 305 },
         { label: "Week 4", kwh: 317, baseline: 326 }
+      ],
+      monthly: [
+        { label: "Jan", kwh: 1120, baseline: 1190 },
+        { label: "Feb", kwh: 1088, baseline: 1160 },
+        { label: "Mar", kwh: 1196, baseline: 1228 },
+        { label: "Apr", kwh: 1188, baseline: 1254 }
       ]
     },
     devices: [
@@ -159,9 +168,9 @@ export const mockData = {
       {
         id: "res-rec-1",
         priority: "High",
-        title: "Air conditioning load is climbing",
+        title: "Air conditioning contributed the highest cost today",
         message:
-          "Air conditioning usage is 12% above the weekly baseline. Consider a higher set point between 1 PM and 4 PM.",
+          "Air conditioning contributed the highest cost today. Consider increasing the setpoint by 1-2°C.",
         impact: "Save about 4.1 kWh today",
         confidence: 88,
         status: "Ready to apply"
@@ -169,9 +178,9 @@ export const mockData = {
       {
         id: "res-rec-2",
         priority: "Medium",
-        title: "Office devices are idle but powered",
+        title: "Kitchen appliance usage peaked during evening hours",
         message:
-          "Office equipment has consumed 1.3 kWh while idle. Enable automatic sleep mode for monitors and printer circuits.",
+          "Kitchen appliance usage peaked during evening hours. Review standby usage after dinner.",
         impact: "Reduce standby cost by 9-12%",
         confidence: 81,
         status: "Suggest only"
@@ -179,9 +188,9 @@ export const mockData = {
       {
         id: "res-rec-3",
         priority: "Low",
-        title: "Lighting schedule can be tightened",
+        title: "Lighting usage continued after midnight",
         message:
-          "Bedroom lighting has repeated late-night usage. Add a reminder or scheduled off command after 11 PM.",
+          "Lighting usage continued after midnight. Consider enabling automatic reminders.",
         impact: "Save about 1.2 kWh nightly",
         confidence: 76,
         status: "Reminder available"
@@ -216,10 +225,12 @@ export const mockData = {
   },
   enterprise: {
     settings: {
-      tariffRate: 0.52,
-      currency: "USD",
+      tariffRate: 0.50,
+      currency: "MYR",
       energySavingTarget: 12,
       co2ReductionTargetKg: 8200,
+      morningNotificationTime: "08:00",
+      nightNotificationTime: "18:30",
       notificationTime: "08:00",
       notificationPreference: "Critical alerts and shift summaries",
       automationPreference: "Suggest Only",
@@ -227,14 +238,23 @@ export const mockData = {
         "Production Line A",
         "Production Line B",
         "HVAC System",
-        "CNC Machine",
-        "Compressor",
-        "Lighting Zone",
+        "Compressor Room",
         "Server Room",
-        "Other machines/zones"
+        "Lighting Zone",
+        "Office Area",
+        "Warehouse"
       ],
       departments: ["Manufacturing", "Utilities", "Facilities", "IT", "Warehouse"],
-      zones: ["North Plant", "South Plant", "Clean Room", "Warehouse", "Admin Block"]
+      zones: [
+        "Production Line A",
+        "Production Line B",
+        "HVAC System",
+        "Compressor Room",
+        "Server Room",
+        "Lighting Zone",
+        "Office Area",
+        "Warehouse"
+      ]
     },
     summary: {
       totalEnergyKwh: 18420,
@@ -250,7 +270,7 @@ export const mockData = {
       }
     },
     trends: {
-      daily: [
+      hourly: [
         { label: "00:00", kwh: 820, baseline: 740 },
         { label: "03:00", kwh: 760, baseline: 700 },
         { label: "06:00", kwh: 1180, baseline: 980 },
@@ -260,7 +280,7 @@ export const mockData = {
         { label: "18:00", kwh: 2840, baseline: 2480 },
         { label: "21:00", kwh: 1930, baseline: 1750 }
       ],
-      weekly: [
+      daily: [
         { label: "Mon", kwh: 16680, baseline: 15420 },
         { label: "Tue", kwh: 17290, baseline: 15880 },
         { label: "Wed", kwh: 18120, baseline: 16240 },
@@ -269,11 +289,17 @@ export const mockData = {
         { label: "Sat", kwh: 12150, baseline: 10920 },
         { label: "Sun", kwh: 18420, baseline: 15600 }
       ],
-      monthly: [
+      weekly: [
         { label: "Week 1", kwh: 123800, baseline: 118500 },
         { label: "Week 2", kwh: 127400, baseline: 119300 },
         { label: "Week 3", kwh: 132900, baseline: 121200 },
         { label: "Week 4", kwh: 142200, baseline: 124800 }
+      ],
+      monthly: [
+        { label: "Jan", kwh: 498200, baseline: 476400 },
+        { label: "Feb", kwh: 512900, baseline: 487800 },
+        { label: "Mar", kwh: 519700, baseline: 493300 },
+        { label: "Apr", kwh: 526300, baseline: 501900 }
       ]
     },
     devices: [
@@ -331,7 +357,7 @@ export const mockData = {
       },
       {
         id: "ent-compressor",
-        name: "Compressor",
+        name: "Compressor Room",
         type: "Utility system",
         department: "Utilities",
         zone: "South Plant",
@@ -357,7 +383,7 @@ export const mockData = {
       },
       {
         id: "ent-lighting",
-        name: "Lighting Zone 3",
+        name: "Lighting Zone",
         type: "Zone circuit",
         department: "Facilities",
         zone: "Warehouse",
@@ -370,7 +396,7 @@ export const mockData = {
       },
       {
         id: "ent-other",
-        name: "Other machines/zones",
+        name: "Warehouse",
         type: "Mixed load",
         department: "Mixed",
         zone: "Multiple",

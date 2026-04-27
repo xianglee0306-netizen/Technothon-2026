@@ -80,7 +80,7 @@ export default function ControlPanel({ mode, devices, settings, controlMessage, 
 
         <div className="mt-4 flex gap-3 rounded-xl border border-amber-300/25 bg-amber-400/10 p-3 text-sm leading-6 text-amber-100">
           <ShieldCheck className="mt-0.5 shrink-0" size={18} aria-hidden="true" />
-          <p>Prototype control only. Real deployment requires hardware validation and safety authorization.</p>
+          <p>Prototype control only. Real deployment requires hardware validation, electrical safety approval, and authorized personnel.</p>
         </div>
       </div>
     </Panel>

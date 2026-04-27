@@ -11,7 +11,7 @@ import {
 } from "recharts";
 import { Panel, SectionHeader } from "./ui.jsx";
 
-const ranges = ["daily", "weekly", "monthly"];
+const ranges = ["hourly", "daily", "weekly", "monthly"];
 
 export default function EnergyTrendChart({ mode, range, trends, onRangeChange }) {
   const chartTitle = mode === "enterprise" ? "Facility demand trend" : "Circuit usage trend";
@@ -24,7 +24,7 @@ export default function EnergyTrendChart({ mode, range, trends, onRangeChange })
         eyebrow={chartEyebrow}
         title={chartTitle}
         action={
-          <div className="grid grid-cols-3 rounded-xl border border-white/10 bg-white/5 p-1">
+          <div className="grid grid-cols-2 rounded-xl border border-white/10 bg-white/5 p-1 sm:grid-cols-4">
             {ranges.map((item) => (
               <button
                 type="button"
