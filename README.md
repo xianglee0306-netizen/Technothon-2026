@@ -1,4 +1,4 @@
-# GridSenseIQ
+git# GridSenseIQ
 
 GridSenseIQ is a mobile-friendly smart energy monitoring prototype for an energy efficiency competition.
 
