@@ -24,14 +24,14 @@ export default function EnergyTrendChart({ mode, range, trends, onRangeChange })
         eyebrow={chartEyebrow}
         title={chartTitle}
         action={
-          <div className="grid grid-cols-3 rounded-lg border border-slate-200 bg-slate-100 p-1">
+          <div className="grid grid-cols-3 rounded-xl border border-white/10 bg-white/5 p-1">
             {ranges.map((item) => (
               <button
                 type="button"
                 key={item}
                 onClick={() => onRangeChange(item)}
-                className={`min-h-9 rounded-md px-3 text-xs font-semibold capitalize transition ${
-                  range === item ? "bg-white text-slate-950 shadow-sm" : "text-slate-600 hover:bg-white/70"
+                className={`min-h-9 rounded-lg px-3 text-xs font-semibold capitalize transition ${
+                  range === item ? "bg-cyan-300 text-slate-950 shadow-[0_8px_24px_rgba(34,211,238,0.18)]" : "text-slate-300 hover:bg-white/10 hover:text-white"
                 }`}
               >
                 {item}
@@ -44,10 +44,10 @@ export default function EnergyTrendChart({ mode, range, trends, onRangeChange })
       <div className="h-[300px] px-2 py-4 sm:h-[340px] sm:px-5">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={trends?.data || []} margin={{ top: 10, right: 16, left: 0, bottom: 10 }}>
-            <CartesianGrid stroke="#e2e8f0" strokeDasharray="4 4" />
-            <XAxis dataKey="label" tick={{ fill: "#475569", fontSize: 12 }} tickLine={false} axisLine={false} />
+            <CartesianGrid stroke="rgba(148, 163, 184, 0.16)" strokeDasharray="4 4" />
+            <XAxis dataKey="label" tick={{ fill: "#94a3b8", fontSize: 12 }} tickLine={false} axisLine={false} />
             <YAxis
-              tick={{ fill: "#475569", fontSize: 12 }}
+              tick={{ fill: "#94a3b8", fontSize: 12 }}
               tickLine={false}
               axisLine={false}
               width={58}
@@ -55,9 +55,11 @@ export default function EnergyTrendChart({ mode, range, trends, onRangeChange })
             />
             <Tooltip
               contentStyle={{
-                border: "1px solid #cbd5e1",
-                borderRadius: "8px",
-                boxShadow: "0 10px 30px rgb(15 23 42 / 0.12)"
+                border: "1px solid rgba(255, 255, 255, 0.12)",
+                borderRadius: "12px",
+                background: "rgba(15, 23, 42, 0.94)",
+                color: "#e2e8f0",
+                boxShadow: "0 18px 50px rgb(2 6 23 / 0.35)"
               }}
               formatter={(value) => [`${Number(value).toLocaleString()} kWh`, ""]}
             />
@@ -66,7 +68,7 @@ export default function EnergyTrendChart({ mode, range, trends, onRangeChange })
               type="monotone"
               name="Actual usage"
               dataKey="kwh"
-              stroke="#0f766e"
+              stroke="#22d3ee"
               strokeWidth={3}
               dot={{ r: 3 }}
               activeDot={{ r: 6 }}
@@ -75,7 +77,7 @@ export default function EnergyTrendChart({ mode, range, trends, onRangeChange })
               type="monotone"
               name="Expected baseline"
               dataKey="baseline"
-              stroke="#f59e0b"
+              stroke="#fbbf24"
               strokeWidth={2}
               strokeDasharray="6 5"
               dot={false}

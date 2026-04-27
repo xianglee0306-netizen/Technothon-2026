@@ -17,7 +17,7 @@ const modeOptions = [
 
 export default function ModeSwitch({ mode, onChange }) {
   return (
-    <div className="grid grid-cols-2 rounded-lg border border-slate-200 bg-slate-100 p-1" aria-label="User mode">
+    <div className="grid grid-cols-2 rounded-2xl border border-white/10 bg-white/5 p-1" aria-label="User mode">
       {modeOptions.map((option) => {
         const Icon = option.icon;
         const active = mode === option.id;
@@ -27,8 +27,8 @@ export default function ModeSwitch({ mode, onChange }) {
             key={option.id}
             type="button"
             onClick={() => onChange(option.id)}
-            className={`flex min-h-11 items-center justify-center gap-2 rounded-md px-3 text-sm font-semibold transition ${
-              active ? "bg-white text-slate-950 shadow-sm" : "text-slate-600 hover:bg-white/70 hover:text-slate-900"
+            className={`flex min-h-11 items-center justify-center gap-2 rounded-xl px-3 text-sm font-semibold transition ${
+              active ? "bg-cyan-300 text-slate-950 shadow-[0_10px_30px_rgba(34,211,238,0.18)]" : "text-slate-300 hover:bg-white/10 hover:text-white"
             }`}
             aria-pressed={active}
             title={option.label}
