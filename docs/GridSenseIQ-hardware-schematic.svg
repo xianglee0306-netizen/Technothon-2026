@@ -1,0 +1,126 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 640" role="img" aria-labelledby="diagram-title diagram-desc">
+  <title id="diagram-title">GridSenseIQ Hardware Architecture</title>
+  <desc id="diagram-desc">Four-layer hardware-software architecture: physical sensors capture energy data, ESP32 gateway transmits over Wi-Fi via MQTT to cloud platform with time-series database and AI engine, surfacing insight to the user dashboard. Approved actions flow back down to control hardware.</desc>
+
+  <!-- Background -->
+  <rect width="900" height="640" fill="#0a0f1f"/>
+
+  <!-- Subtle grid pattern -->
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1a2845" stroke-width="0.5"/>
+    </pattern>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7dd3fc"/>
+    </marker>
+    <marker id="arrowReturn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#fb923c"/>
+    </marker>
+  </defs>
+  <rect width="900" height="640" fill="url(#grid)" opacity="0.4"/>
+
+  <!-- Header -->
+  <text x="40" y="40" font-family="-apple-system, system-ui, sans-serif" font-size="22" font-weight="700" fill="#f8fafc">GridSenseIQ — Hardware Architecture</text>
+  <text x="40" y="62" font-family="-apple-system, system-ui, sans-serif" font-size="12" font-weight="500" fill="#94a3b8" letter-spacing="2">SOFTWARE GIVES INSIGHT · HARDWARE GIVES EVIDENCE</text>
+
+  <!-- ============================================================ -->
+  <!-- LAYER 1: PHYSICAL — sensors at the building -->
+  <!-- ============================================================ -->
+  <text x="40" y="110" font-family="-apple-system, system-ui, sans-serif" font-size="11" font-weight="700" fill="#7dd3fc" letter-spacing="2.5">PHYSICAL LAYER</text>
+
+  <!-- Sensor 1: Smart plug -->
+  <g>
+    <rect x="60" y="124" width="220" height="86" rx="10" fill="#0c1830" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="170" y="148" font-family="-apple-system, system-ui, sans-serif" font-size="14" font-weight="700" fill="#f8fafc" text-anchor="middle">Smart plug</text>
+    <text x="170" y="168" font-family="-apple-system, system-ui, sans-serif" font-size="11" fill="#bae6fd" text-anchor="middle">Sonoff S26 R2 / Tasmota</text>
+    <text x="170" y="186" font-family="JetBrains Mono, ui-monospace, monospace" font-size="10" fill="#94a3b8" text-anchor="middle">Per-device draw · 240V AC · 16A</text>
+    <text x="170" y="200" font-family="JetBrains Mono, ui-monospace, monospace" font-size="9" fill="#64748b" text-anchor="middle">Wi-Fi mesh to gateway</text>
+  </g>
+
+  <!-- Sensor 2: CT clamp -->
+  <g>
+    <rect x="340" y="124" width="220" height="86" rx="10" fill="#0c1830" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="450" y="148" font-family="-apple-system, system-ui, sans-serif" font-size="14" font-weight="700" fill="#f8fafc" text-anchor="middle">CT clamp</text>
+    <text x="450" y="168" font-family="-apple-system, system-ui, sans-serif" font-size="11" fill="#bae6fd" text-anchor="middle">SCT-013 100A non-invasive</text>
+    <text x="450" y="186" font-family="JetBrains Mono, ui-monospace, monospace" font-size="10" fill="#94a3b8" text-anchor="middle">Per-circuit load · 0–100A</text>
+    <text x="450" y="200" font-family="JetBrains Mono, ui-monospace, monospace" font-size="9" fill="#64748b" text-anchor="middle">Analog → ESP32 ADC</text>
+  </g>
+
+  <!-- Sensor 3: Energy meter -->
+  <g>
+    <rect x="620" y="124" width="220" height="86" rx="10" fill="#0c1830" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="730" y="148" font-family="-apple-system, system-ui, sans-serif" font-size="14" font-weight="700" fill="#f8fafc" text-anchor="middle">Energy meter</text>
+    <text x="730" y="168" font-family="-apple-system, system-ui, sans-serif" font-size="11" fill="#bae6fd" text-anchor="middle">PZEM-004T V3</text>
+    <text x="730" y="186" font-family="JetBrains Mono, ui-monospace, monospace" font-size="10" fill="#94a3b8" text-anchor="middle">Whole-building V·A·W·kWh</text>
+    <text x="730" y="200" font-family="JetBrains Mono, ui-monospace, monospace" font-size="9" fill="#64748b" text-anchor="middle">Modbus-RTU TTL</text>
+  </g>
+
+  <!-- Connectors: sensors → gateway (3 lines converging) -->
+  <path d="M 170 210 L 170 240 L 380 240 L 380 270" fill="none" stroke="#7dd3fc" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="450" y1="210" x2="450" y2="270" stroke="#7dd3fc" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M 730 210 L 730 240 L 520 240 L 520 270" fill="none" stroke="#7dd3fc" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Protocol annotation -->
+  <text x="860" y="244" font-family="JetBrains Mono, ui-monospace, monospace" font-size="9" fill="#7dd3fc" text-anchor="end" letter-spacing="1">Modbus · GPIO · Wi-Fi</text>
+
+  <!-- ============================================================ -->
+  <!-- LAYER 2: GATEWAY — ESP32 -->
+  <!-- ============================================================ -->
+  <text x="40" y="290" font-family="-apple-system, system-ui, sans-serif" font-size="11" font-weight="700" fill="#a78bfa" letter-spacing="2.5">GATEWAY LAYER</text>
+
+  <g>
+    <rect x="300" y="304" width="300" height="74" rx="10" fill="#1a1330" stroke="#a78bfa" stroke-width="1.5"/>
+    <text x="450" y="328" font-family="-apple-system, system-ui, sans-serif" font-size="14" font-weight="700" fill="#f8fafc" text-anchor="middle">ESP32-WROOM-32 gateway</text>
+    <text x="450" y="348" font-family="-apple-system, system-ui, sans-serif" font-size="11" fill="#ddd6fe" text-anchor="middle">Dual-core 240MHz · 4MB flash · Wi-Fi + BLE</text>
+    <text x="450" y="366" font-family="JetBrains Mono, ui-monospace, monospace" font-size="10" fill="#94a3b8" text-anchor="middle">Firmware: ESP-IDF + MQTT client + OTA update</text>
+  </g>
+
+  <!-- Connector: gateway → cloud -->
+  <line x1="450" y1="378" x2="450" y2="420" stroke="#7dd3fc" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="460" y="402" font-family="JetBrains Mono, ui-monospace, monospace" font-size="9" fill="#7dd3fc">MQTT/TLS over Wi-Fi</text>
+
+  <!-- ============================================================ -->
+  <!-- LAYER 3: CLOUD -->
+  <!-- ============================================================ -->
+  <text x="40" y="438" font-family="-apple-system, system-ui, sans-serif" font-size="11" font-weight="700" fill="#5eead4" letter-spacing="2.5">CLOUD LAYER</text>
+
+  <g>
+    <rect x="60" y="452" width="780" height="92" rx="10" fill="#0a1f24" stroke="#14b8a6" stroke-width="1.5"/>
+    <text x="450" y="478" font-family="-apple-system, system-ui, sans-serif" font-size="13" font-weight="700" fill="#f8fafc" text-anchor="middle">Cloud platform</text>
+
+    <!-- Three sub-boxes inside -->
+    <g>
+      <rect x="92" y="494" width="220" height="40" rx="6" fill="#0c2a30" stroke="#14b8a6" stroke-width="0.7" opacity="0.85"/>
+      <text x="202" y="512" font-family="-apple-system, system-ui, sans-serif" font-size="12" font-weight="700" fill="#f0fdfa" text-anchor="middle">MQTT broker</text>
+      <text x="202" y="526" font-family="JetBrains Mono, ui-monospace, monospace" font-size="9" fill="#5eead4" text-anchor="middle">Mosquitto · 8883/TLS</text>
+    </g>
+    <g>
+      <rect x="340" y="494" width="220" height="40" rx="6" fill="#0c2a30" stroke="#14b8a6" stroke-width="0.7" opacity="0.85"/>
+      <text x="450" y="512" font-family="-apple-system, system-ui, sans-serif" font-size="12" font-weight="700" fill="#f0fdfa" text-anchor="middle">Time-series DB</text>
+      <text x="450" y="526" font-family="JetBrains Mono, ui-monospace, monospace" font-size="9" fill="#5eead4" text-anchor="middle">InfluxDB 2 · 30s buckets</text>
+    </g>
+    <g>
+      <rect x="588" y="494" width="220" height="40" rx="6" fill="#0c2a30" stroke="#14b8a6" stroke-width="0.7" opacity="0.85"/>
+      <text x="698" y="512" font-family="-apple-system, system-ui, sans-serif" font-size="12" font-weight="700" fill="#f0fdfa" text-anchor="middle">AI engine</text>
+      <text x="698" y="526" font-family="JetBrains Mono, ui-monospace, monospace" font-size="9" fill="#5eead4" text-anchor="middle">Anomaly + ranking</text>
+    </g>
+  </g>
+
+  <!-- Connector: cloud → user -->
+  <line x1="450" y1="544" x2="450" y2="572" stroke="#7dd3fc" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="460" y="562" font-family="JetBrains Mono, ui-monospace, monospace" font-size="9" fill="#7dd3fc">HTTPS · WebSocket</text>
+
+  <!-- ============================================================ -->
+  <!-- LAYER 4: USER -->
+  <!-- ============================================================ -->
+  <g>
+    <rect x="280" y="572" width="340" height="48" rx="10" fill="#1f1f1f" stroke="#94a3b8" stroke-width="1.5"/>
+    <text x="450" y="594" font-family="-apple-system, system-ui, sans-serif" font-size="13" font-weight="700" fill="#f8fafc" text-anchor="middle">Web + mobile dashboard</text>
+    <text x="450" y="610" font-family="JetBrains Mono, ui-monospace, monospace" font-size="10" fill="#cbd5e1" text-anchor="middle">Insight · approve · automate</text>
+  </g>
+
+  <!-- Return control loop: user → gateway (dashed, orange) -->
+  <path d="M 620 596 Q 870 596 870 340 Q 870 200 600 340 L 600 340" fill="none" stroke="#fb923c" stroke-width="1" stroke-dasharray="4 4" opacity="0.7" marker-end="url(#arrowReturn)"/>
+  <text x="868" y="430" font-family="JetBrains Mono, ui-monospace, monospace" font-size="9" fill="#fb923c" text-anchor="end" letter-spacing="0.5">Approved action</text>
+  <text x="868" y="442" font-family="JetBrains Mono, ui-monospace, monospace" font-size="9" fill="#fb923c" text-anchor="end" letter-spacing="0.5">→ MQTT command</text>
+</svg>

@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Automation Hub - GridSense IQ</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600&amp;family=Space+Grotesk:wght@600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-container": "#007070",
+                        "surface-container": "#201f20",
+                        "primary-fixed-dim": "#00dddd",
+                        "on-error": "#690005",
+                        "surface-container-low": "#1c1b1c",
+                        "primary-container": "#00fbfb",
+                        "on-tertiary-fixed-variant": "#474746",
+                        "surface-container-high": "#2a2a2b",
+                        "primary": "#ffffff",
+                        "inverse-surface": "#e5e2e3",
+                        "tertiary-container": "#e5e2e1",
+                        "on-secondary-fixed": "#360f00",
+                        "on-tertiary": "#313030",
+                        "on-surface-variant": "#b9cac9",
+                        "surface-variant": "#353436",
+                        "surface-tint": "#00dddd",
+                        "on-secondary": "#581e00",
+                        "secondary-fixed-dim": "#ffb596",
+                        "on-error-container": "#ffdad6",
+                        "secondary-container": "#fe6500",
+                        "on-primary-fixed-variant": "#004f4f",
+                        "outline": "#839493",
+                        "surface-dim": "#131314",
+                        "surface-container-lowest": "#0e0e0f",
+                        "secondary": "#ffb596",
+                        "secondary-fixed": "#ffdbcd",
+                        "on-tertiary-fixed": "#1c1b1b",
+                        "on-surface": "#e5e2e3",
+                        "tertiary-fixed-dim": "#c8c6c5",
+                        "inverse-primary": "#006a6a",
+                        "surface-bright": "#3a393a",
+                        "on-background": "#e5e2e3",
+                        "inverse-on-surface": "#313031",
+                        "tertiary": "#ffffff",
+                        "on-primary": "#003737",
+                        "error-container": "#93000a",
+                        "background": "#131314",
+                        "on-primary-fixed": "#002020",
+                        "tertiary-fixed": "#e5e2e1",
+                        "on-secondary-container": "#541d00",
+                        "on-secondary-fixed-variant": "#7c2e00",
+                        "surface": "#131314",
+                        "outline-variant": "#3a4a49",
+                        "primary-fixed": "#00fbfb",
+                        "error": "#ffb4ab",
+                        "surface-container-highest": "#353436",
+                        "on-tertiary-container": "#656464"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "container-max": "1440px",
+                        "margin": "40px",
+                        "unit": "4px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Space Grotesk"],
+                        "headline-xl": ["Space Grotesk"],
+                        "headline-md": ["Space Grotesk"],
+                        "body-lg": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "label-sm": ["Space Grotesk"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-xl": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #131314;
+            background-image: radial-gradient(circle at top right, rgba(0, 251, 251, 0.05) 0%, transparent 40%),
+                              radial-gradient(circle at bottom left, rgba(254, 101, 0, 0.05) 0%, transparent 40%);
+            background-attachment: fixed;
+        }
+        .glass-panel {
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-top-color: rgba(255, 255, 255, 0.3);
+            border-left-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+        .glow-border-cyan:focus-within {
+            border-color: #00fbfb;
+            box-shadow: 0 0 15px rgba(0, 251, 251, 0.4);
+        }
+        .neon-text-cyan {
+            text-shadow: 0 0 8px rgba(0, 251, 251, 0.6);
+        }
+        .neon-text-orange {
+            text-shadow: 0 0 8px rgba(254, 101, 0, 0.6);
+        }
+        .btn-primary {
+            background-color: #00fbfb;
+            color: #002020;
+            box-shadow: 0 0 15px rgba(0, 251, 251, 0.4);
+            transition: all 0.2s ease-in-out;
+        }
+        .btn-primary:hover {
+            background-color: #fe6500;
+            color: #fff;
+            box-shadow: 0 0 20px rgba(254, 101, 0, 0.6);
+        }
+        .btn-secondary {
+            background-color: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid #00fbfb;
+            color: #00fbfb;
+            transition: all 0.2s ease-in-out;
+        }
+        .btn-secondary:hover {
+            background-color: rgba(0, 251, 251, 0.1);
+            box-shadow: 0 0 10px rgba(0, 251, 251, 0.3);
+        }
+        
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #00fbfb;
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #00fbfb;
+            box-shadow: 0 0 10px rgba(0, 251, 251, 0.5);
+        }
+        .toggle-checkbox:checked + .toggle-label:after {
+            transform: translateX(100%);
+            border-color: white;
+        }
+    </style>
+</head>
+<body class="text-on-surface font-body-md min-h-screen flex flex-col antialiased">
+<!-- TopAppBar -->
+<header class="bg-slate-950/80 backdrop-blur-xl docked full-width top-0 border-b border-white/15 shadow-[0_4px_20px_rgba(0,0,0,0.5)] z-50">
+<div class="flex justify-between items-center w-full px-6 h-16">
+<div class="flex items-center gap-4">
+<a class="flex items-center text-cyan-400 dark:text-cyan-400 hover:text-orange-500 hover:drop-shadow-[0_0_10px_rgba(255,165,0,0.5)] transition-all active:scale-95 duration-75 ease-in-out group" href="#">
+<span class="material-symbols-outlined mr-2">arrow_back</span>
+<span class="font-['Space_Grotesk'] tracking-tight text-sm uppercase font-bold">Back to Hub</span>
+</a>
+</div>
+<div class="flex-1 flex justify-center">
+<h1 class="text-xl font-black tracking-tighter text-cyan-400 drop-shadow-[0_0_8px_rgba(0,255,255,0.6)]">
+                    GridSense IQ
+                </h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-slate-400 hover:text-orange-500 hover:drop-shadow-[0_0_10px_rgba(255,165,0,0.5)] transition-all p-2 rounded-full active:scale-95 duration-75 ease-in-out">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">settings</span>
+</button>
+<button class="text-slate-400 hover:text-orange-500 hover:drop-shadow-[0_0_10px_rgba(255,165,0,0.5)] transition-all p-2 rounded-full active:scale-95 duration-75 ease-in-out relative">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">notifications</span>
+<span class="absolute top-1 right-1 w-2 h-2 bg-secondary-container rounded-full shadow-[0_0_5px_rgba(254,101,0,0.8)]"></span>
+</button>
+<button class="ml-4 px-6 py-2 rounded-full font-label-sm uppercase btn-primary active:scale-95 duration-75 ease-in-out">
+                    Create New Rule
+                </button>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 w-full max-w-container-max mx-auto px-6 py-margin space-y-gutter relative z-10">
+<!-- Header Section -->
+<div class="flex justify-between items-end mb-8">
+<div>
+<h2 class="font-headline-xl text-headline-xl text-primary mb-2">Automation Hub</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+                    Configure active logic matrices and monitor live telemetry execution pathways across all linked subsystems.
+                </p>
+</div>
+<div class="flex gap-4">
+<div class="glass-panel rounded-lg px-4 py-2 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary-fixed-dim neon-text-cyan">network_check</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">System Status</span>
+<span class="font-headline-md text-body-md text-primary-fixed-dim">NOMINAL</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Rules Engine Matrix -->
+<section class="glass-panel rounded-xl overflow-hidden mb-gutter">
+<div class="px-6 py-4 border-b border-white/10 bg-surface-container-high/50 flex justify-between items-center">
+<h3 class="font-headline-lg text-headline-md text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-fixed-dim">account_tree</span>
+                    Logic Directives
+                </h3>
+<div class="flex items-center gap-4">
+<div class="relative w-64 glow-border-cyan rounded-lg transition-colors">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">search</span>
+<input class="w-full bg-surface-container-lowest border-none rounded-lg pl-10 pr-4 py-2 font-body-md text-body-md text-primary placeholder-on-surface-variant focus:ring-0" placeholder="Filter directives..." type="text"/>
+</div>
+</div>
+</div>
+<div class="divide-y divide-white/10">
+<!-- Rule Row 1 (Active) -->
+<div class="p-6 hover:bg-surface-container-high/30 transition-colors group flex items-center justify-between">
+<div class="flex items-start gap-6 flex-1">
+<!-- Toggle -->
+<div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in mt-1">
+<input checked="" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer z-10 opacity-0" id="toggle1" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-surface-container-highest cursor-pointer relative before:absolute before:inset-0 before:bg-surface-container-highest before:rounded-full before:transition-colors after:absolute after:left-1 after:top-1 after:bg-white after:w-4 after:h-4 after:rounded-full after:transition-transform" for="toggle1"></label>
+</div>
+<!-- Logic Content -->
+<div class="flex-1">
+<div class="flex items-center gap-3 mb-1">
+<span class="font-label-sm text-label-sm text-primary-fixed-dim px-2 py-0.5 rounded border border-primary-fixed-dim/30 bg-primary-fixed-dim/10">ID: RUL-092A</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">HVAC Load Shedding</span>
+</div>
+<div class="font-headline-md text-body-lg text-primary flex items-center flex-wrap gap-2">
+<span class="text-on-surface-variant">IF</span>
+<span class="px-2 py-1 bg-surface-container rounded text-primary border border-white/5">Load &gt; 90%</span>
+<span class="text-on-surface-variant">AND</span>
+<span class="px-2 py-1 bg-surface-container rounded text-primary border border-white/5">Time = PEAK</span>
+<span class="text-primary-fixed-dim ml-2">THEN</span>
+<span class="px-2 py-1 bg-surface-container rounded text-primary border border-white/5">Shutdown HVAC Z1, Z2</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-3 ml-6 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="btn-secondary px-4 py-2 rounded-lg font-label-sm text-label-sm uppercase flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">play_circle</span>
+                            Simulate
+                        </button>
+<button class="p-2 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</div>
+</div>
+<!-- Rule Row 2 (Active) -->
+<div class="p-6 hover:bg-surface-container-high/30 transition-colors group flex items-center justify-between">
+<div class="flex items-start gap-6 flex-1">
+<div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in mt-1">
+<input checked="" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer z-10 opacity-0" id="toggle2" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-surface-container-highest cursor-pointer relative before:absolute before:inset-0 before:bg-surface-container-highest before:rounded-full before:transition-colors after:absolute after:left-1 after:top-1 after:bg-white after:w-4 after:h-4 after:rounded-full after:transition-transform" for="toggle2"></label>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-3 mb-1">
+<span class="font-label-sm text-label-sm text-primary-fixed-dim px-2 py-0.5 rounded border border-primary-fixed-dim/30 bg-primary-fixed-dim/10">ID: RUL-104B</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Emergency Grid Sync</span>
+</div>
+<div class="font-headline-md text-body-lg text-primary flex items-center flex-wrap gap-2">
+<span class="text-on-surface-variant">IF</span>
+<span class="px-2 py-1 bg-surface-container rounded text-primary border border-white/5">Battery &lt; 20%</span>
+<span class="text-on-surface-variant">OR</span>
+<span class="px-2 py-1 bg-surface-container rounded text-secondary-container border border-secondary-container/30">Grid Freq &lt; 49.5Hz</span>
+<span class="text-primary-fixed-dim ml-2">THEN</span>
+<span class="px-2 py-1 bg-surface-container rounded text-primary border border-white/5">Initiate Grid Sync</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-3 ml-6 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="btn-secondary px-4 py-2 rounded-lg font-label-sm text-label-sm uppercase flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">play_circle</span>
+                            Simulate
+                        </button>
+<button class="p-2 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</div>
+</div>
+<!-- Rule Row 3 (Inactive) -->
+<div class="p-6 hover:bg-surface-container-high/30 transition-colors group flex items-center justify-between opacity-60">
+<div class="flex items-start gap-6 flex-1">
+<div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in mt-1">
+<input class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer z-10 opacity-0" id="toggle3" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-surface-container-highest cursor-pointer relative before:absolute before:inset-0 before:bg-surface-container-highest before:rounded-full before:transition-colors after:absolute after:left-1 after:top-1 after:bg-on-surface-variant after:w-4 after:h-4 after:rounded-full after:transition-transform" for="toggle3"></label>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-3 mb-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant px-2 py-0.5 rounded border border-white/10 bg-surface-container-highest">ID: RUL-011C</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Cooling Override</span>
+</div>
+<div class="font-headline-md text-body-lg text-on-surface-variant flex items-center flex-wrap gap-2">
+<span>IF</span>
+<span class="px-2 py-1 bg-surface-container rounded border border-white/5">Temp &gt; 45°C</span>
+<span class="ml-2">THEN</span>
+<span class="px-2 py-1 bg-surface-container rounded border border-white/5">Max Cooling Pumps</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-3 ml-6 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="btn-secondary px-4 py-2 rounded-lg font-label-sm text-label-sm uppercase flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">play_circle</span>
+                            Simulate
+                        </button>
+<button class="p-2 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Live Execution Logs -->
+<section class="glass-panel rounded-xl overflow-hidden">
+<div class="px-6 py-4 border-b border-white/10 bg-surface-container-high/50 flex justify-between items-center">
+<h3 class="font-headline-lg text-headline-md text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary-container neon-text-orange">terminal</span>
+                    Live Execution Logs
+                </h3>
+<span class="flex items-center gap-2 font-label-sm text-label-sm text-primary-fixed-dim">
+<span class="w-2 h-2 rounded-full bg-primary-fixed-dim animate-pulse shadow-[0_0_8px_rgba(0,251,251,0.8)]"></span>
+                    STREAMING
+                </span>
+</div>
+<div class="p-6 bg-[#0a0a0b] font-mono text-sm max-h-96 overflow-y-auto">
+<ol class="list-decimal list-inside space-y-2 text-on-surface-variant marker:text-outline">
+<li class="py-1">
+<span class="text-primary-fixed-dim">[10:42:01.001]</span> <span class="text-primary">SYS_TICK:</span> Polling telemetry nodes... <span class="text-outline text-xs">latency: 12ms</span>
+</li>
+<li class="py-1">
+<span class="text-primary-fixed-dim">[10:42:01.150]</span> <span class="text-primary">EVAL:</span> Checking RUL-092A... Condition (Load &gt; 90%) == FALSE (Current: 82%)
+                    </li>
+<li class="py-1">
+<span class="text-primary-fixed-dim">[10:42:01.155]</span> <span class="text-primary">EVAL:</span> Checking RUL-104B... Condition (Battery &lt; 20%) == FALSE (Current: 88%)
+                    </li>
+<li class="py-1 bg-surface-container-low/50 rounded border-l-2 border-secondary-container pl-2">
+<span class="text-secondary-container">[10:42:02.010]</span> <span class="text-primary">WARN:</span> Node Alpha-7 reporting high latency (150ms).
+                    </li>
+<li class="py-1">
+<span class="text-primary-fixed-dim">[10:42:03.001]</span> <span class="text-primary">SYS_TICK:</span> Polling telemetry nodes... <span class="text-outline text-xs">latency: 14ms</span>
+</li>
+<li class="py-1">
+<span class="text-primary-fixed-dim">[10:42:03.140]</span> <span class="text-primary">EVAL:</span> Checking RUL-092A... Condition (Load &gt; 90%) == FALSE (Current: 84%)
+                    </li>
+</ol>
+</div>
+</section>
+</main>
+</body></html>

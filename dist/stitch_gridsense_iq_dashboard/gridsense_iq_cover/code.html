@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>GRIDSENSE IQ - Telemetry System</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&amp;family=Manrope:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-container": "#00fbfb",
+                        "secondary-fixed-dim": "#ffb596",
+                        "surface-container-low": "#1c1b1c",
+                        "surface-dim": "#131314",
+                        "surface-container-lowest": "#0e0e0f",
+                        "surface-container-high": "#2a2a2b",
+                        "primary-fixed-dim": "#00dddd",
+                        "inverse-primary": "#006a6a",
+                        "on-tertiary-fixed": "#1c1b1b",
+                        "surface-container": "#201f20",
+                        "on-tertiary-container": "#656464",
+                        "background": "#131314",
+                        "inverse-surface": "#e5e2e3",
+                        "on-primary-fixed": "#002020",
+                        "on-secondary-container": "#541d00",
+                        "tertiary-container": "#e5e2e1",
+                        "on-error-container": "#ffdad6",
+                        "outline-variant": "#3a4a49",
+                        "on-secondary-fixed": "#360f00",
+                        "surface-bright": "#3a393a",
+                        "secondary": "#ffb596",
+                        "on-surface-variant": "#b9cac9",
+                        "on-surface": "#e5e2e3",
+                        "on-primary-fixed-variant": "#004f4f",
+                        "error": "#ffb4ab",
+                        "inverse-on-surface": "#313031",
+                        "primary-fixed": "#00fbfb",
+                        "on-secondary-fixed-variant": "#7c2e00",
+                        "tertiary-fixed": "#e5e2e1",
+                        "on-tertiary-fixed-variant": "#474746",
+                        "error-container": "#93000a",
+                        "on-error": "#690005",
+                        "outline": "#839493",
+                        "surface-variant": "#353436",
+                        "secondary-container": "#fe6500",
+                        "surface-container-highest": "#353436",
+                        "secondary-fixed": "#ffdbcd",
+                        "on-primary-container": "#007070",
+                        "on-primary": "#003737",
+                        "on-tertiary": "#313030",
+                        "tertiary-fixed-dim": "#c8c6c5",
+                        "on-background": "#e5e2e3",
+                        "primary": "#ffffff",
+                        "surface-tint": "#00dddd",
+                        "tertiary": "#ffffff",
+                        "surface": "#131314",
+                        "on-secondary": "#581e00"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "container-max": "1440px",
+                        "unit": "4px",
+                        "margin": "40px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Space Grotesk"],
+                        "label-sm": ["Space Grotesk"],
+                        "headline-lg": ["Space Grotesk"],
+                        "body-lg": ["Manrope"],
+                        "headline-xl": ["Space Grotesk"],
+                        "body-md": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-xl": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            border-left: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        .neon-bloom-primary {
+            box-shadow: 0 0 15px rgba(0, 251, 251, 0.4);
+        }
+        .neon-bloom-primary:hover {
+            box-shadow: 0 0 25px rgba(0, 251, 251, 0.6);
+        }
+        .carbon-texture {
+            background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255, 255, 255, 0.03) 10px, rgba(255, 255, 255, 0.03) 20px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="hidden md:flex justify-between items-center w-full px-6 py-3 fixed docked full-width top-0 border-b border-white/10 bg-zinc-950/50 backdrop-blur-xl z-50 shadow-[0_4px_30px_rgba(0,0,0,0.5)] border-b border-white/15">
+<div class="flex items-center gap-4">
+<span class="text-xl font-bold tracking-widest text-cyan-400 drop-shadow-[0_0_10px_rgba(0,255,255,0.6)] font-['Space_Grotesk'] tracking-tighter">GRIDSENSE IQ</span>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-zinc-400 hover:text-white hover:bg-white/5 transition-all duration-300 p-2 rounded-full">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-zinc-400 hover:text-white hover:bg-white/5 transition-all duration-300 p-2 rounded-full">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-white/20">
+<img alt="User technical profile" class="w-full h-full object-cover" data-alt="Portrait of a young woman with a neutral expression, dramatic studio lighting against a dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaCXEuEzTh14zg3_drxUttu0d8kVWtJ-Ol-E-CkqGDD_xCezNJ0EkYw4XUNl2pbx6QdfL2oF0qyX1ilIZ65zV-U-V8mY-cCbxb5pkH8ojdUo_fUBw-ZntWjYwKRTv6fKrL-ZSjsIS7HI2ap9vYskn25wEPZA-DbYttdD_zrK8xBpCSvXZg7LfpaNfHXXNxk2ICjDu-3uxpORGXpn9bwSvojSn9wcWPWeG4qF31JiinQaQ27xrivfU8bMaTzSBYoehOig2MdjrrOQUd"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex flex-col relative w-full mt-[60px] md:mt-[72px] mb-[60px] md:mb-0">
+<!-- Hero Section -->
+<section class="relative min-h-[921px] flex flex-col items-center justify-center overflow-hidden px-6 py-24 carbon-texture">
+<!-- Fluid Reactive Background Mock -->
+<div class="absolute inset-0 z-0 opacity-30 pointer-events-none">
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary-fixed rounded-full blur-[150px] mix-blend-screen"></div>
+</div>
+<div class="relative z-10 text-center max-w-4xl mx-auto flex flex-col items-center gap-8">
+<h1 class="font-headline-xl text-headline-xl text-primary drop-shadow-[0_0_20px_rgba(0,251,251,0.5)] uppercase tracking-tighter">
+                    GRIDSENSE IQ
+                </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">
+                    Elite motorsport engineering fused with real-time telemetry. Master the grid with predictive analytics and absolute system control.
+                </p>
+<button class="bg-primary-container text-on-primary-container font-label-sm text-label-sm uppercase px-8 py-4 rounded DEFAULT neon-bloom-primary transition-all hover:bg-surface-tint hover:text-on-primary flex items-center gap-2 mt-4">
+                    Enter System
+                    <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</section>
+<!-- Features Section -->
+<section class="w-full max-w-container-max mx-auto px-6 py-24 z-10 relative">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Feature 1 -->
+<div class="glass-panel rounded-xl p-8 flex flex-col gap-4 relative group overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary-fixed to-transparent opacity-50 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex items-center gap-4">
+<span class="font-headline-lg text-headline-lg text-surface-variant opacity-30 group-hover:text-primary-fixed group-hover:opacity-100 transition-colors">01</span>
+<h3 class="font-headline-md text-headline-md text-primary">Real-time Telemetry Analysis</h3>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2">
+                        Instant data ingestion and processing. Monitor critical system metrics with sub-millisecond latency.
+                    </p>
+</div>
+<!-- Feature 2 -->
+<div class="glass-panel rounded-xl p-8 flex flex-col gap-4 relative group overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-secondary-fixed-dim to-transparent opacity-50 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex items-center gap-4">
+<span class="font-headline-lg text-headline-lg text-surface-variant opacity-30 group-hover:text-secondary-fixed-dim group-hover:opacity-100 transition-colors">02</span>
+<h3 class="font-headline-md text-headline-md text-primary">Predictive AI Scenarios</h3>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2">
+                        Advanced machine learning models simulate future track conditions and optimal engineering adjustments.
+                    </p>
+</div>
+<!-- Feature 3 -->
+<div class="glass-panel rounded-xl p-8 flex flex-col gap-4 relative group overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary-fixed to-transparent opacity-50 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex items-center gap-4">
+<span class="font-headline-lg text-headline-lg text-surface-variant opacity-30 group-hover:text-primary-fixed group-hover:opacity-100 transition-colors">03</span>
+<h3 class="font-headline-md text-headline-md text-primary">Automated Optimization Control</h3>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2">
+                        Execute precision adjustments autonomously. Maintain peak performance thresholds without manual intervention.
+                    </p>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full flex flex-col md:flex-row justify-between items-center px-12 full-width py-8 border-t border-white/5 bg-zinc-950 border-t border-zinc-900 mt-auto z-50 relative">
+<div class="text-zinc-400 font-bold font-['Space_Grotesk'] text-[10px] tracking-widest mb-4 md:mb-0">
+            © 2024 GRIDSENSE IQ | ELITE MOTORSPORT DIVISION
+        </div>
+<div class="flex gap-6">
+<a class="text-zinc-600 hover:text-cyan-400 font-['Space_Grotesk'] text-[10px] tracking-widest transition-colors" href="#">System Status</a>
+<a class="text-zinc-600 hover:text-cyan-400 font-['Space_Grotesk'] text-[10px] tracking-widest transition-colors" href="#">Terms of Service</a>
+<a class="text-zinc-600 hover:text-cyan-400 font-['Space_Grotesk'] text-[10px] tracking-widest transition-colors" href="#">Privacy Protocol</a>
+</div>
+</footer>
+</body></html>

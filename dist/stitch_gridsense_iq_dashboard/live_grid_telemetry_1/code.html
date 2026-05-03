@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Live Grid Telemetry</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&amp;family=Space+Grotesk:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-bright": "#3a393a",
+                    "on-background": "#e5e2e3",
+                    "inverse-on-surface": "#313031",
+                    "tertiary": "#ffffff",
+                    "on-primary": "#003737",
+                    "error-container": "#93000a",
+                    "secondary": "#ffb596",
+                    "secondary-fixed": "#ffdbcd",
+                    "on-tertiary-fixed": "#1c1b1b",
+                    "on-surface": "#e5e2e3",
+                    "tertiary-fixed-dim": "#c8c6c5",
+                    "inverse-primary": "#006a6a",
+                    "tertiary-fixed": "#e5e2e1",
+                    "on-secondary-container": "#541d00",
+                    "background": "#131314",
+                    "on-primary-fixed": "#002020",
+                    "surface": "#131314",
+                    "on-secondary-fixed-variant": "#7c2e00",
+                    "primary-fixed": "#00fbfb",
+                    "error": "#ffb4ab",
+                    "surface-container-highest": "#353436",
+                    "on-tertiary-container": "#656464",
+                    "outline-variant": "#3a4a49",
+                    "surface-container-low": "#1c1b1c",
+                    "primary-container": "#00fbfb",
+                    "on-tertiary-fixed-variant": "#474746",
+                    "surface-container-high": "#2a2a2b",
+                    "primary": "#ffffff",
+                    "inverse-surface": "#e5e2e3",
+                    "on-primary-container": "#007070",
+                    "surface-container": "#201f20",
+                    "primary-fixed-dim": "#00dddd",
+                    "on-error": "#690005",
+                    "tertiary-container": "#e5e2e1",
+                    "on-secondary-fixed": "#360f00",
+                    "surface-tint": "#00dddd",
+                    "on-secondary": "#581e00",
+                    "secondary-fixed-dim": "#ffb596",
+                    "on-tertiary": "#313030",
+                    "on-surface-variant": "#b9cac9",
+                    "surface-variant": "#353436",
+                    "outline": "#839493",
+                    "surface-dim": "#131314",
+                    "surface-container-lowest": "#0e0e0f",
+                    "on-error-container": "#ffdad6",
+                    "secondary-container": "#fe6500",
+                    "on-primary-fixed-variant": "#004f4f"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "margin": "40px",
+                    "container-max": "1440px",
+                    "unit": "4px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "headline-xl": [
+                            "Space Grotesk"
+                    ],
+                    "headline-lg": [
+                            "Space Grotesk"
+                    ],
+                    "body-md": [
+                            "Manrope"
+                    ],
+                    "label-sm": [
+                            "Space Grotesk"
+                    ],
+                    "headline-md": [
+                            "Space Grotesk"
+                    ],
+                    "body-lg": [
+                            "Manrope"
+                    ]
+            },
+            "fontSize": {
+                    "headline-xl": [
+                            "48px",
+                            {
+                                    "lineHeight": "1.1",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "headline-lg": [
+                            "32px",
+                            {
+                                    "lineHeight": "1.2",
+                                    "letterSpacing": "-0.01em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "body-md": [
+                            "16px",
+                            {
+                                    "lineHeight": "1.5",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "label-sm": [
+                            "12px",
+                            {
+                                    "lineHeight": "1",
+                                    "letterSpacing": "0.1em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "headline-md": [
+                            "24px",
+                            {
+                                    "lineHeight": "1.3",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "body-lg": [
+                            "18px",
+                            {
+                                    "lineHeight": "1.6",
+                                    "fontWeight": "400"
+                            }
+                    ]
+            }
+    },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #0D1117;
+            background-image: linear-gradient(45deg, rgba(255,255,255,0.02) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.02) 50%, rgba(255,255,255,0.02) 75%, transparent 75%, transparent);
+            background-size: 8px 8px;
+        }
+        .glass-panel {
+            background: rgba(19, 19, 20, 0.7);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            border-left: 1px solid rgba(255, 255, 255, 0.15);
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .neon-glow-cyan {
+            box-shadow: 0 0 15px rgba(0, 251, 251, 0.4);
+        }
+        .neon-glow-orange {
+            box-shadow: 0 0 15px rgba(254, 101, 0, 0.4);
+        }
+    </style>
+</head>
+<body class="text-on-background min-h-screen flex flex-col font-body-md antialiased selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopAppBar -->
+<header class="bg-neutral-950/70 backdrop-blur-md font-['Space_Grotesk'] tracking-tight docked full-width top-0 border-b border-white/10 shadow-[0_0_20px_rgba(0,255,255,0.15)] flex justify-between items-center w-full px-6 h-16 sticky z-50">
+<div class="flex items-center gap-4">
+<button class="text-cyan-400 hover:text-orange-500 transition-colors duration-300 active:scale-95 flex items-center gap-2 group">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0, 'wght' 300;">arrow_back</span>
+<span class="font-label-sm uppercase tracking-widest group-hover:text-orange-500 transition-colors duration-300">Back to Hub</span>
+</button>
+</div>
+<div class="text-xl font-bold tracking-tighter text-cyan-400 uppercase">
+            GridSense IQ
+        </div>
+<div class="flex items-center gap-4">
+<button class="text-neutral-400 hover:text-orange-500 transition-colors duration-300 active:scale-95 p-2 rounded-full">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0, 'wght' 300;">settings</span>
+</button>
+<button class="text-neutral-400 hover:text-orange-500 transition-colors duration-300 active:scale-95 p-2 rounded-full">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0, 'wght' 300;">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow p-gutter md:p-margin max-w-container-max mx-auto w-full relative z-10">
+<div class="mb-gutter">
+<h1 class="font-headline-xl text-headline-xl text-primary mb-2">Live Grid Telemetry</h1>
+<div class="flex items-center gap-4 text-primary-fixed-dim font-label-sm text-label-sm uppercase tracking-widest border-l-2 border-primary-fixed-dim pl-3">
+<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-primary-fixed animate-pulse shadow-[0_0_8px_#00fbfb]"></span> System Nominal</span>
+<span>|</span>
+<span>Latency: 12ms</span>
+</div>
+</div>
+<!-- Telemetry Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-gutter">
+<!-- Device Card 1 -->
+<article class="glass-panel rounded-xl p-6 flex flex-col gap-6 relative group hover:-translate-y-2 transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,255,255,0.2)] hover:border-primary-container/50">
+<!-- Header & Status -->
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary-fixed-dim" style="font-variation-settings: 'FILL' 0, 'wght' 200; font-size: 32px;">air</span>
+<h2 class="font-headline-md text-headline-md text-tertiary">HVAC Sector Alpha</h2>
+</div>
+<div class="flex flex-col items-end">
+<div class="w-4 h-4 rounded-full bg-green-500 shadow-[0_0_12px_rgba(34,197,94,0.8)] mb-1"></div>
+<span class="font-label-sm text-label-sm text-green-400 uppercase">Active</span>
+</div>
+</div>
+<!-- Telemetry Stream -->
+<div class="bg-surface-container-highest/50 rounded-lg p-4 border border-outline-variant/30 flex-grow">
+<ol class="list-decimal list-inside font-body-md text-body-md text-on-surface-variant space-y-3 marker:text-primary-fixed-dim marker:font-bold">
+<li class="flex justify-between border-b border-white/5 pb-2">
+<span>Current Load</span>
+<span class="text-primary font-mono tracking-wider">84.2%</span>
+</li>
+<li class="flex justify-between border-b border-white/5 pb-2">
+<span>Efficiency Score</span>
+<span class="text-primary font-mono tracking-wider">0.92</span>
+</li>
+<li class="flex justify-between">
+<span>Operating Temp</span>
+<span class="text-secondary font-mono tracking-wider">18.4°C</span>
+</li>
+</ol>
+</div>
+<!-- Actions -->
+<div class="grid grid-cols-2 gap-3 mt-auto">
+<button class="bg-primary-container text-on-primary-container font-label-sm text-label-sm uppercase py-3 px-4 rounded hover:bg-secondary-container hover:text-white transition-all duration-300 hover:shadow-[0_0_15px_rgba(254,101,0,0.5)] active:scale-95 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[16px]">power_settings_new</span>
+                        POWER TOGGLE
+                    </button>
+<button class="border border-primary-container text-primary-container font-label-sm text-label-sm uppercase py-3 px-4 rounded hover:bg-primary-container/10 transition-all duration-300 active:scale-95 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[16px]">smart_toy</span>
+                        SIMULATE AI
+                    </button>
+</div>
+</article>
+<!-- Device Card 2 -->
+<article class="glass-panel rounded-xl p-6 flex flex-col gap-6 relative group hover:-translate-y-2 transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,255,255,0.2)] hover:border-primary-container/50">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary-fixed-dim" style="font-variation-settings: 'FILL' 0, 'wght' 200; font-size: 32px;">lightbulb</span>
+<h2 class="font-headline-md text-headline-md text-tertiary">Grid Illumination</h2>
+</div>
+<div class="flex flex-col items-end">
+<div class="w-4 h-4 rounded-full bg-green-500 shadow-[0_0_12px_rgba(34,197,94,0.8)] mb-1"></div>
+<span class="font-label-sm text-label-sm text-green-400 uppercase">Active</span>
+</div>
+</div>
+<div class="bg-surface-container-highest/50 rounded-lg p-4 border border-outline-variant/30 flex-grow">
+<ol class="list-decimal list-inside font-body-md text-body-md text-on-surface-variant space-y-3 marker:text-primary-fixed-dim marker:font-bold">
+<li class="flex justify-between border-b border-white/5 pb-2">
+<span>Lux Output</span>
+<span class="text-primary font-mono tracking-wider">4200 lx</span>
+</li>
+<li class="flex justify-between border-b border-white/5 pb-2">
+<span>Zone Coverage</span>
+<span class="text-primary font-mono tracking-wider">98%</span>
+</li>
+<li class="flex justify-between">
+<span>Power Draw</span>
+<span class="text-primary font-mono tracking-wider">12.4 kW</span>
+</li>
+</ol>
+</div>
+<div class="grid grid-cols-2 gap-3 mt-auto">
+<button class="bg-primary-container text-on-primary-container font-label-sm text-label-sm uppercase py-3 px-4 rounded hover:bg-secondary-container hover:text-white transition-all duration-300 hover:shadow-[0_0_15px_rgba(254,101,0,0.5)] active:scale-95 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[16px]">power_settings_new</span>
+                        POWER TOGGLE
+                    </button>
+<button class="border border-primary-container text-primary-container font-label-sm text-label-sm uppercase py-3 px-4 rounded hover:bg-primary-container/10 transition-all duration-300 active:scale-95 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[16px]">smart_toy</span>
+                        SIMULATE AI
+                    </button>
+</div>
+</article>
+<!-- Device Card 3 -->
+<article class="glass-panel rounded-xl p-6 flex flex-col gap-6 relative group hover:-translate-y-2 transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,255,255,0.2)] hover:border-primary-container/50">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary-fixed-dim" style="font-variation-settings: 'FILL' 0, 'wght' 200; font-size: 32px;">compress</span>
+<h2 class="font-headline-md text-headline-md text-tertiary">Main Compressors</h2>
+</div>
+<div class="flex flex-col items-end">
+<div class="w-4 h-4 rounded-full bg-surface-variant border border-outline-variant mb-1"></div>
+<span class="font-label-sm text-label-sm text-outline uppercase">Standby</span>
+</div>
+</div>
+<div class="bg-surface-container-highest/50 rounded-lg p-4 border border-outline-variant/30 flex-grow opacity-60 group-hover:opacity-100 transition-opacity">
+<ol class="list-decimal list-inside font-body-md text-body-md text-on-surface-variant space-y-3 marker:text-primary-fixed-dim marker:font-bold">
+<li class="flex justify-between border-b border-white/5 pb-2">
+<span>System Pressure</span>
+<span class="text-primary font-mono tracking-wider">0 PSI</span>
+</li>
+<li class="flex justify-between border-b border-white/5 pb-2">
+<span>Valve Status</span>
+<span class="text-primary font-mono tracking-wider">CLOSED</span>
+</li>
+<li class="flex justify-between">
+<span>Next Cycle</span>
+<span class="text-primary font-mono tracking-wider">14:00</span>
+</li>
+</ol>
+</div>
+<div class="grid grid-cols-2 gap-3 mt-auto">
+<button class="bg-primary-container text-on-primary-container font-label-sm text-label-sm uppercase py-3 px-4 rounded hover:bg-secondary-container hover:text-white transition-all duration-300 hover:shadow-[0_0_15px_rgba(254,101,0,0.5)] active:scale-95 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[16px]">power_settings_new</span>
+                        POWER TOGGLE
+                    </button>
+<button class="border border-primary-container text-primary-container font-label-sm text-label-sm uppercase py-3 px-4 rounded hover:bg-primary-container/10 transition-all duration-300 active:scale-95 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[16px]">smart_toy</span>
+                        SIMULATE AI
+                    </button>
+</div>
+</article>
+<!-- Device Card 4 -->
+<article class="glass-panel rounded-xl p-6 flex flex-col gap-6 relative group hover:-translate-y-2 transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,255,255,0.2)] hover:border-primary-container/50">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary-fixed-dim" style="font-variation-settings: 'FILL' 0, 'wght' 200; font-size: 32px;">ac_unit</span>
+<h2 class="font-headline-md text-headline-md text-tertiary">Primary Chillers</h2>
+</div>
+<div class="flex flex-col items-end">
+<div class="w-4 h-4 rounded-full bg-green-500 shadow-[0_0_12px_rgba(34,197,94,0.8)] mb-1"></div>
+<span class="font-label-sm text-label-sm text-green-400 uppercase">Active</span>
+</div>
+</div>
+<div class="bg-surface-container-highest/50 rounded-lg p-4 border border-outline-variant/30 flex-grow">
+<ol class="list-decimal list-inside font-body-md text-body-md text-on-surface-variant space-y-3 marker:text-primary-fixed-dim marker:font-bold">
+<li class="flex justify-between border-b border-white/5 pb-2">
+<span>Flow Rate</span>
+<span class="text-primary font-mono tracking-wider">450 L/m</span>
+</li>
+<li class="flex justify-between border-b border-white/5 pb-2">
+<span>Return Temp</span>
+<span class="text-primary font-mono tracking-wider">12.1°C</span>
+</li>
+<li class="flex justify-between">
+<span>Cooling Capacity</span>
+<span class="text-secondary font-mono tracking-wider">94%</span>
+</li>
+</ol>
+</div>
+<div class="grid grid-cols-2 gap-3 mt-auto">
+<button class="bg-primary-container text-on-primary-container font-label-sm text-label-sm uppercase py-3 px-4 rounded hover:bg-secondary-container hover:text-white transition-all duration-300 hover:shadow-[0_0_15px_rgba(254,101,0,0.5)] active:scale-95 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[16px]">power_settings_new</span>
+                        POWER TOGGLE
+                    </button>
+<button class="border border-primary-container text-primary-container font-label-sm text-label-sm uppercase py-3 px-4 rounded hover:bg-primary-container/10 transition-all duration-300 active:scale-95 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[16px]">smart_toy</span>
+                        SIMULATE AI
+                    </button>
+</div>
+</article>
+</div>
+<!-- Bottom Telemetry Strip -->
+<div class="mt-margin border-t border-white/10 pt-4 flex justify-between items-center text-label-sm font-label-sm uppercase text-outline-variant tracking-widest">
+<div class="flex items-center gap-4">
+<span>Data Link: Encrypted</span>
+<span class="material-symbols-outlined text-[14px]">lock</span>
+</div>
+<div class="font-mono">
+                SYNC: 14:22:04 UTC
+            </div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="bg-neutral-950/80 backdrop-blur-xl font-['Space_Grotesk'] text-[10px] uppercase font-semibold fixed bottom-0 w-full z-50 border-t border-white/15 shadow-[0_-5px_25px_rgba(0,0,0,0.5)] fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 pb-safe md:hidden">
+<button class="flex flex-col items-center justify-center text-neutral-500 hover:text-orange-400 transition-all active:scale-90 duration-150 gap-1 w-full h-full">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0, 'wght' 300;">grid_view</span>
+<span>Hub</span>
+</button>
+<button class="flex flex-col items-center justify-center text-cyan-400 drop-shadow-[0_0_8px_#00ffff66] hover:text-orange-400 transition-all active:scale-90 duration-150 gap-1 w-full h-full">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1, 'wght' 400;">analytics</span>
+<span>Live Grid</span>
+</button>
+<button class="flex flex-col items-center justify-center text-neutral-500 hover:text-orange-400 transition-all active:scale-90 duration-150 gap-1 w-full h-full">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0, 'wght' 300;">precision_manufacturing</span>
+<span>Simulator</span>
+</button>
+<button class="flex flex-col items-center justify-center text-neutral-500 hover:text-orange-400 transition-all active:scale-90 duration-150 gap-1 w-full h-full">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0, 'wght' 300;">payments</span>
+<span>ROI</span>
+</button>
+</nav>
+</body></html>

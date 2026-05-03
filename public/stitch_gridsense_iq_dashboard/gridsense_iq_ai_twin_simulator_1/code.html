@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI Twin Simulator - GridSense IQ</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700;900&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary-container": "#656464",
+                      "secondary": "#ffb596",
+                      "surface-container-highest": "#353436",
+                      "on-primary-fixed": "#002020",
+                      "on-error-container": "#ffdad6",
+                      "on-primary-fixed-variant": "#004f4f",
+                      "surface-container-high": "#2a2a2b",
+                      "surface": "#131314",
+                      "on-secondary-container": "#541d00",
+                      "background": "#131314",
+                      "outline": "#839493",
+                      "primary": "#ffffff",
+                      "surface-tint": "#00dddd",
+                      "surface-dim": "#131314",
+                      "on-tertiary-fixed": "#1c1b1b",
+                      "on-primary-container": "#007070",
+                      "secondary-fixed": "#ffdbcd",
+                      "on-background": "#e5e2e3",
+                      "primary-container": "#00fbfb",
+                      "tertiary": "#ffffff",
+                      "on-tertiary-fixed-variant": "#474746",
+                      "error": "#ffb4ab",
+                      "primary-fixed-dim": "#00dddd",
+                      "inverse-on-surface": "#313031",
+                      "surface-container-lowest": "#0e0e0f",
+                      "surface-bright": "#3a393a",
+                      "secondary-fixed-dim": "#ffb596",
+                      "on-tertiary": "#313030",
+                      "tertiary-fixed-dim": "#c8c6c5",
+                      "tertiary-fixed": "#e5e2e1",
+                      "surface-container-low": "#1c1b1c",
+                      "surface-variant": "#353436",
+                      "on-secondary-fixed-variant": "#7c2e00",
+                      "tertiary-container": "#e5e2e1",
+                      "secondary-container": "#fe6500",
+                      "outline-variant": "#3a4a49",
+                      "on-primary": "#003737",
+                      "on-error": "#690005",
+                      "on-secondary-fixed": "#360f00",
+                      "inverse-surface": "#e5e2e3",
+                      "inverse-primary": "#006a6a",
+                      "on-surface": "#e5e2e3",
+                      "error-container": "#93000a",
+                      "primary-fixed": "#00fbfb",
+                      "on-surface-variant": "#b9cac9",
+                      "surface-container": "#201f20",
+                      "on-secondary": "#581e00"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "unit": "4px",
+                      "gutter": "24px",
+                      "container-max": "1440px",
+                      "margin": "40px"
+              },
+              "fontFamily": {
+                      "headline-xl": [
+                              "Space Grotesk"
+                      ],
+                      "headline-lg": [
+                              "Space Grotesk"
+                      ],
+                      "body-md": [
+                              "Manrope"
+                      ],
+                      "label-sm": [
+                              "Space Grotesk"
+                      ],
+                      "headline-md": [
+                              "Space Grotesk"
+                      ],
+                      "body-lg": [
+                              "Manrope"
+                      ]
+              },
+              "fontSize": {
+                      "headline-xl": [
+                              "48px",
+                              {
+                                      "lineHeight": "1.1",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "1.5",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "1",
+                                      "letterSpacing": "0.1em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "1.3",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        .glass-panel {
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            border-left: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        .carbon-bg {
+            background-image: repeating-linear-gradient(45deg, rgba(0,0,0,0.8) 0, rgba(0,0,0,0.8) 2px, rgba(19,19,20,0.8) 2px, rgba(19,19,20,0.8) 4px);
+        }
+        .neon-glow-primary {
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+        }
+        .neon-glow-secondary {
+            box-shadow: 0 0 15px rgba(255, 101, 0, 0.4);
+        }
+        .line-glow-primary {
+            filter: drop-shadow(0 0 4px rgba(0, 255, 255, 0.8));
+        }
+        .line-glow-secondary {
+            filter: drop-shadow(0 0 4px rgba(255, 101, 0, 0.8));
+        }
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #131314;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #353436;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00dddd;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen flex flex-col carbon-bg antialiased">
+<!-- TopAppBar -->
+<header class="bg-zinc-950/70 backdrop-blur-md font-['Space_Grotesk'] tracking-tight text-sm uppercase font-bold docked full-width top-0 border-b border-white/10 shadow-[0_0_20px_rgba(0,255,255,0.15)] flex justify-between items-center w-full px-6 h-20 max-w-[1440px] mx-auto z-50 sticky top-0">
+<div class="flex items-center gap-4">
+<button class="flex items-center gap-2 text-zinc-500 font-medium hover:text-orange-500 hover:drop-shadow-[0_0_10px_rgba(255,165,0,0.6)] transition-all duration-300">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">arrow_back</span>
+                Back to Hub
+            </button>
+</div>
+<div class="text-xl font-black text-white tracking-widest uppercase">GridSense IQ</div>
+<div class="flex items-center gap-6">
+<nav class="hidden md:flex gap-8">
+<!-- Suppressed navigation as this is a task-focused subpage per Semantic Shell Mandate -->
+</nav>
+<div class="flex items-center gap-4">
+<button class="text-zinc-500 font-medium hover:text-orange-500 hover:drop-shadow-[0_0_10px_rgba(255,165,0,0.6)] transition-all duration-300">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">settings</span>
+</button>
+<button class="text-zinc-500 font-medium hover:text-orange-500 hover:drop-shadow-[0_0_10px_rgba(255,165,0,0.6)] transition-all duration-300">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">notifications</span>
+</button>
+</div>
+</div>
+</header>
+<main class="flex-grow w-full max-w-[1440px] mx-auto p-gutter pt-margin mb-24">
+<div class="mb-gutter">
+<h1 class="font-headline-xl text-headline-xl text-primary mb-2">AI Twin Simulator</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Configure grid parameters and run predictive simulations to optimize energy routing and minimize operational costs.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left Column: Controls -->
+<div class="lg:col-span-4 flex flex-col gap-gutter">
+<div class="glass-panel rounded-xl p-6 relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary-fixed/5 rounded-full blur-3xl -mr-10 -mt-10"></div>
+<h2 class="font-headline-md text-headline-md text-primary mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-fixed" style="font-variation-settings: 'FILL' 1;">tune</span>
+                        Simulation Parameters
+                    </h2>
+<form class="space-y-6">
+<!-- Select Input -->
+<div class="space-y-2">
+<label class="block font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Grid Sector</label>
+<div class="relative">
+<select class="w-full bg-surface-container-highest/50 border border-outline-variant rounded-lg px-4 py-3 text-on-surface appearance-none focus:outline-none focus:border-primary-fixed focus:ring-1 focus:ring-primary-fixed transition-colors glass-panel">
+<option>Sector Alpha - Industrial</option>
+<option>Sector Beta - Residential</option>
+<option>Sector Gamma - Commercial</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+</div>
+<!-- Number Input -->
+<div class="space-y-2">
+<label class="block font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Load Target (MW)</label>
+<div class="relative">
+<input class="w-full bg-surface-container-highest/50 border-b border-outline-variant bg-transparent px-4 py-3 text-on-surface focus:outline-none focus:border-primary-fixed transition-all" type="number" value="450"/>
+<div class="absolute bottom-0 left-0 w-full h-[1px] bg-primary-fixed scale-x-0 origin-left transition-transform duration-300 focus-within:scale-x-100"></div>
+</div>
+</div>
+<!-- Range Input -->
+<div class="space-y-2">
+<div class="flex justify-between items-end mb-2">
+<label class="block font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Efficiency Threshold</label>
+<span class="font-headline-lg text-headline-lg text-primary-fixed">92%</span>
+</div>
+<input class="w-full accent-primary-fixed h-1 bg-surface-container-high rounded-full appearance-none cursor-pointer" max="100" min="0" type="range" value="92"/>
+</div>
+<!-- Ordered List for Steps -->
+<div class="mt-8">
+<h3 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mb-4">Execution Sequence</h3>
+<ol class="list-decimal list-inside space-y-3 font-body-md text-body-md text-on-surface-variant marker:text-secondary-container marker:font-bold">
+<li class="pl-2 border-l-2 border-surface-container-highest">Initialize Base State Telemetry</li>
+<li class="pl-2 border-l-2 border-primary-fixed text-primary bg-primary-fixed/5 py-1 -ml-0.5 relative">
+<div class="absolute left-0 top-0 w-full h-full border-l-2 border-primary-fixed neon-glow-primary"></div>
+                                    Apply Load Balancing Heuristics
+                                </li>
+<li class="pl-2 border-l-2 border-surface-container-highest">Compile Output Matrices</li>
+</ol>
+</div>
+<!-- Action Button -->
+<button class="w-full mt-8 bg-primary-fixed text-on-primary-fixed font-headline-md text-headline-md py-4 rounded-lg flex items-center justify-center gap-3 hover:bg-secondary-container hover:text-white transition-all duration-300 hover:scale-[1.02] neon-glow-primary hover:neon-glow-secondary group" type="button">
+<span class="material-symbols-outlined group-hover:rotate-180 transition-transform duration-500" style="font-variation-settings: 'FILL' 1;">play_circle</span>
+                            Run Simulation
+                        </button>
+</form>
+</div>
+<!-- Secondary Action -->
+<button class="w-full border border-primary-fixed/50 text-primary-fixed font-label-sm text-label-sm uppercase tracking-widest py-3 rounded-lg flex items-center justify-center gap-2 hover:bg-primary-fixed/10 transition-colors glass-panel" type="button">
+<span class="material-symbols-outlined text-[18px]">history</span>
+                    Load Previous Config
+                </button>
+</div>
+<!-- Right Column: Data Visualization -->
+<div class="lg:col-span-8 flex flex-col gap-gutter">
+<!-- Main Chart Container -->
+<div class="glass-panel rounded-xl p-6 flex-grow flex flex-col relative">
+<div class="flex justify-between items-center mb-6">
+<h2 class="font-headline-md text-headline-md text-primary">Energy Utilization Profile</h2>
+<div class="flex gap-4 font-label-sm text-label-sm uppercase tracking-widest">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<div class="w-3 h-3 rounded-full bg-surface-variant"></div>
+                                Baseline
+                            </div>
+<div class="flex items-center gap-2 text-primary-fixed drop-shadow-[0_0_5px_rgba(0,255,255,0.5)]">
+<div class="w-3 h-3 rounded-full bg-primary-fixed neon-glow-primary"></div>
+                                Predicted
+                            </div>
+</div>
+</div>
+<!-- Decorative Telemetry Strip -->
+<div class="absolute top-6 right-6 flex gap-4 font-['Space_Grotesk'] text-[10px] text-on-surface-variant opacity-50">
+<span>SYS_T: 42°C</span>
+<span>LATENCY: 12ms</span>
+<span>OPS/S: 4.2k</span>
+</div>
+<!-- Faux Chart Area -->
+<div class="flex-grow relative border-b border-l border-surface-container-high pb-4 pl-4 mt-4 min-h-[300px]">
+<!-- Y-Axis Labels -->
+<div class="absolute left-[-30px] top-0 bottom-4 flex flex-col justify-between text-[10px] text-on-surface-variant font-mono">
+<span>100</span>
+<span>75</span>
+<span>50</span>
+<span>25</span>
+<span>0</span>
+</div>
+<!-- Grid Lines -->
+<div class="absolute inset-0 flex flex-col justify-between ml-4 mb-4 z-0 opacity-10">
+<div class="w-full h-px bg-white"></div>
+<div class="w-full h-px bg-white"></div>
+<div class="w-full h-px bg-white"></div>
+<div class="w-full h-px bg-white"></div>
+<div class="w-full h-px bg-white"></div>
+</div>
+<!-- Chart Lines (SVG) -->
+<svg class="w-full h-full absolute inset-0 z-10 overflow-visible" preserveaspectratio="none" viewbox="0 0 100 100">
+<!-- Baseline (Grey) -->
+<path class="opacity-50" d="M 0,80 Q 20,75 40,50 T 80,60 T 100,70" fill="none" stroke="#353436" stroke-width="2"></path>
+<!-- Predicted (Cyan Glow) -->
+<path class="line-glow-primary" d="M 0,80 Q 15,60 30,30 T 60,20 T 100,40" fill="none" stroke="#00fbfb" stroke-width="2.5"></path>
+<!-- Anomaly Peak (Orange) -->
+<circle class="line-glow-secondary" cx="60" cy="20" fill="#fe6500" r="2"></circle>
+<line class="opacity-50" stroke="#fe6500" stroke-dasharray="2 2" stroke-width="1" x1="60" x2="60" y1="20" y2="100"></line>
+</svg>
+<!-- X-Axis Labels -->
+<div class="absolute bottom-[-20px] left-4 right-0 flex justify-between text-[10px] text-on-surface-variant font-mono">
+<span>00:00</span>
+<span>06:00</span>
+<span>12:00</span>
+<span>18:00</span>
+<span>24:00</span>
+</div>
+</div>
+</div>
+<!-- Metrics Row -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Metric Card 1 -->
+<div class="glass-panel rounded-xl p-5 relative overflow-hidden group border-t-2 border-t-primary-fixed/50 hover:border-t-primary-fixed transition-colors">
+<div class="absolute right-[-10px] top-[-10px] opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-[80px] text-primary-fixed" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mb-2">Savings Projection</div>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-xl text-headline-xl text-primary drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]">14.2</span>
+<span class="font-body-md text-body-md text-primary-fixed">MWh</span>
+</div>
+<div class="mt-2 text-[12px] text-secondary-container flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">arrow_downward</span>
+                            12% vs Baseline
+                        </div>
+</div>
+<!-- Metric Card 2 -->
+<div class="glass-panel rounded-xl p-5 relative overflow-hidden group border-t-2 border-t-secondary-container/50 hover:border-t-secondary-container transition-colors">
+<div class="absolute right-[-10px] top-[-10px] opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-[80px] text-secondary-container" style="font-variation-settings: 'FILL' 1;">co2</span>
+</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mb-2">Carbon Reduction</div>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-xl text-headline-xl text-primary drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]">8.5</span>
+<span class="font-body-md text-body-md text-secondary-container">Tons</span>
+</div>
+<div class="mt-2 text-[12px] text-primary-fixed flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">trending_down</span>
+                            Optimal Route Found
+                        </div>
+</div>
+<!-- Metric Card 3 -->
+<div class="glass-panel rounded-xl p-5 relative overflow-hidden group border-t-2 border-t-primary-fixed/50 hover:border-t-primary-fixed transition-colors">
+<div class="absolute right-[-10px] top-[-10px] opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-[80px] text-primary-fixed" style="font-variation-settings: 'FILL' 1;">speed</span>
+</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mb-2">Efficiency Score</div>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-xl text-headline-xl text-primary drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]">98</span>
+<span class="font-body-md text-body-md text-on-surface-variant">/ 100</span>
+</div>
+<div class="w-full bg-surface-container-high h-1 mt-3 rounded-full overflow-hidden">
+<div class="bg-primary-fixed h-full w-[98%] neon-glow-primary"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

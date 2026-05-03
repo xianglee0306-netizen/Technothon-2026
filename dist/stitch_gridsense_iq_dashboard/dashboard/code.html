@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>GridSense IQ - Launchpad</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ffb4ab",
+                        "surface-container-low": "#1c1b1c",
+                        "primary-container": "#00fbfb",
+                        "outline-variant": "#3a4a49",
+                        "secondary-fixed": "#ffdbcd",
+                        "inverse-on-surface": "#313031",
+                        "on-tertiary": "#313030",
+                        "on-surface": "#e5e2e3",
+                        "tertiary-container": "#e5e2e1",
+                        "on-error-container": "#ffdad6",
+                        "surface-container": "#201f20",
+                        "inverse-surface": "#e5e2e3",
+                        "tertiary-fixed": "#e5e2e1",
+                        "surface-container-lowest": "#0e0e0f",
+                        "surface-container-highest": "#353436",
+                        "on-primary-fixed-variant": "#004f4f",
+                        "on-primary-fixed": "#002020",
+                        "on-surface-variant": "#b9cac9",
+                        "surface-tint": "#00dddd",
+                        "outline": "#839493",
+                        "on-error": "#690005",
+                        "surface-container-high": "#2a2a2b",
+                        "on-tertiary-container": "#656464",
+                        "on-secondary-container": "#541d00",
+                        "primary-fixed": "#00fbfb",
+                        "background": "#131314",
+                        "primary": "#ffffff",
+                        "on-background": "#e5e2e3",
+                        "surface-bright": "#3a393a",
+                        "tertiary-fixed-dim": "#c8c6c5",
+                        "secondary": "#ffb596",
+                        "on-secondary-fixed": "#360f00",
+                        "surface-dim": "#131314",
+                        "on-primary": "#003737",
+                        "tertiary": "#ffffff",
+                        "secondary-fixed-dim": "#ffb596",
+                        "on-tertiary-fixed-variant": "#474746",
+                        "surface-variant": "#353436",
+                        "on-tertiary-fixed": "#1c1b1b",
+                        "on-secondary-fixed-variant": "#7c2e00",
+                        "on-secondary": "#581e00",
+                        "error-container": "#93000a",
+                        "on-primary-container": "#007070",
+                        "surface": "#131314",
+                        "inverse-primary": "#006a6a",
+                        "secondary-container": "#fe6500",
+                        "primary-fixed-dim": "#00dddd"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "unit": "4px",
+                        "margin": "40px",
+                        "container-max": "1440px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Space Grotesk"],
+                        "headline-xl": ["Space Grotesk"],
+                        "headline-lg": ["Space Grotesk"],
+                        "body-lg": ["Manrope"],
+                        "headline-md": ["Space Grotesk"],
+                        "body-md": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "700" }],
+                        "headline-xl": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(19, 19, 20, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-top-color: rgba(255, 255, 255, 0.3);
+            border-left-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-panel:hover {
+            transform: translateY(-4px);
+            border-color: #00dddd;
+            box-shadow: 0 0 15px rgba(0, 221, 221, 0.4), 0 4px 30px rgba(0, 0, 0, 0.5);
+        }
+        .glass-panel.orange-glow:hover {
+            border-color: #fe6500;
+            box-shadow: 0 0 15px rgba(254, 101, 0, 0.4), 0 4px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        body {
+            background-color: #0D1117;
+            background-image: 
+                linear-gradient(45deg, rgba(255,255,255,0.02) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.02) 75%, rgba(255,255,255,0.02)),
+                linear-gradient(45deg, rgba(255,255,255,0.02) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.02) 75%, rgba(255,255,255,0.02));
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+            min-height: 100vh;
+        }
+
+        /* Abstract glowing orb effect */
+        .glow-orb {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(0,221,221,0.15) 0%, rgba(0,221,221,0) 70%);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body class="text-on-background overflow-x-hidden relative">
+<div class="glow-orb"></div>
+<main class="relative z-10 w-full max-w-container-max mx-auto px-margin py-margin min-h-screen flex flex-col justify-center items-center">
+<header class="text-center mb-[60px] w-full">
+<h1 class="font-headline-xl text-headline-xl text-primary tracking-tighter uppercase mb-unit">
+                GridSense <span class="text-surface-tint">IQ</span>
+</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">
+                System Launchpad // Core Navigation Hub
+            </p>
+</header>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter w-full auto-rows-[240px]">
+<!-- Dashboard -->
+<a class="glass-panel rounded-xl p-6 flex flex-col justify-between group col-span-1 lg:col-span-2" href="#">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-[32px] text-surface-tint" style="font-variation-settings: 'FILL' 1; stroke-width: 1.5px;">space_dashboard</span>
+<span class="font-label-sm text-label-sm text-surface-tint px-2 py-1 border border-surface-tint/30 rounded">SYS: ACTIVE</span>
+</div>
+<div>
+<h2 class="font-headline-lg text-headline-lg text-primary uppercase tracking-tight mb-2">Dashboard</h2>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Real-time global telemetry overview and primary command center.</p>
+</div>
+</a>
+<!-- AI Twin -->
+<a class="glass-panel orange-glow rounded-xl p-6 flex flex-col justify-between group" href="#">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-[32px] text-secondary-container" style="font-variation-settings: 'FILL' 1; stroke-width: 1.5px;">psychology</span>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md text-primary uppercase tracking-tight mb-2 group-hover:text-secondary-container transition-colors">AI Twin</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Predictive modeling.</p>
+</div>
+</a>
+<!-- Live Grid -->
+<a class="glass-panel rounded-xl p-6 flex flex-col justify-between group row-span-2" href="#">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-[32px] text-surface-tint" style="font-variation-settings: 'FILL' 1; stroke-width: 1.5px;">grid_view</span>
+</div>
+<div class="h-full flex flex-col justify-end mt-4">
+<h2 class="font-headline-md text-headline-md text-primary uppercase tracking-tight mb-4">Live Grid</h2>
+<ol class="list-decimal list-inside font-label-sm text-label-sm text-on-surface-variant space-y-2">
+<li>Sector Alpha</li>
+<li>Sector Beta</li>
+<li>Sector Gamma</li>
+<li>Sector Delta</li>
+</ol>
+</div>
+</a>
+<!-- Automation -->
+<a class="glass-panel rounded-xl p-6 flex flex-col justify-between group" href="#">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-[32px] text-surface-tint" style="font-variation-settings: 'FILL' 1; stroke-width: 1.5px;">smart_toy</span>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md text-primary uppercase tracking-tight mb-2">Automation</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Workflow routines.</p>
+</div>
+</a>
+<!-- Fault Detection -->
+<a class="glass-panel orange-glow rounded-xl p-6 flex flex-col justify-between group" href="#">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-[32px] text-secondary-container" style="font-variation-settings: 'FILL' 1; stroke-width: 1.5px;">warning</span>
+<span class="font-label-sm text-label-sm text-secondary-container px-2 py-1 border border-secondary-container/30 rounded animate-pulse">2 ALERTS</span>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md text-primary uppercase tracking-tight mb-2 group-hover:text-secondary-container transition-colors">Fault Detection</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Anomaly tracking.</p>
+</div>
+</a>
+<!-- ROI -->
+<a class="glass-panel rounded-xl p-6 flex flex-col justify-between group" href="#">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-[32px] text-surface-tint" style="font-variation-settings: 'FILL' 1; stroke-width: 1.5px;">trending_up</span>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md text-primary uppercase tracking-tight mb-2">ROI</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Performance metrics.</p>
+</div>
+</a>
+<!-- Reports -->
+<a class="glass-panel rounded-xl p-6 flex flex-col justify-between group col-span-1 md:col-span-2" href="#">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-[32px] text-surface-tint" style="font-variation-settings: 'FILL' 1; stroke-width: 1.5px;">assessment</span>
+</div>
+<div class="flex items-end justify-between w-full">
+<div>
+<h2 class="font-headline-md text-headline-md text-primary uppercase tracking-tight mb-2">Reports</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Historical data analysis &amp; exports.</p>
+</div>
+<span class="material-symbols-outlined text-surface-tint opacity-0 group-hover:opacity-100 transition-opacity transform translate-x-[-10px] group-hover:translate-x-0 duration-300">arrow_forward</span>
+</div>
+</a>
+<!-- Settings -->
+<a class="glass-panel rounded-xl p-6 flex flex-col justify-between group" href="#">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-[32px] text-on-surface-variant" style="font-variation-settings: 'FILL' 1; stroke-width: 1.5px;">settings</span>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md text-primary uppercase tracking-tight mb-2">Settings</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">System configuration.</p>
+</div>
+</a>
+</div>
+<!-- Bottom Telemetry Strip -->
+<div class="w-full mt-[60px] border-t border-surface-tint/20 pt-4 flex justify-between items-center px-4">
+<span class="font-label-sm text-label-sm text-surface-tint font-mono">SYS_UPTIME: 99.99%</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">LNK_SPD: 10GB/S</span>
+<span class="font-label-sm text-label-sm text-surface-tint font-mono flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-surface-tint animate-pulse"></span> NODE_SYNC: OK</span>
+</div>
+</main>
+<script>
+  // This targets the specific cards on your Launchpad
+  const cards = Array.from(document.querySelectorAll('div, button, a'))
+    .filter(el => ["DASHBOARD", "AI TWIN", "AUTOMATION"].includes(el.innerText.trim()));
+
+  cards.forEach(card => {
+    card.style.cursor = 'pointer'; // Make it feel interactive
+    
+    card.addEventListener('click', async () => {
+      const action = card.innerText.trim();
+      console.log(`Initializing ${action} protocol...`);
+      
+      // Visual feedback: Glow Electric Orange on click
+      card.style.boxShadow = "0 0 20px #ff660066"; 
+
+      try {
+        // Connect to your local backend
+        const response = await fetch('http://localhost:5000/api/generate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ prompt: `Initialize ${action} system` })
+        });
+
+        const data = await response.json();
+        alert(`${action} System Active! Backend says: ` + (data.text || "Ready"));
+        
+      } catch (error) {
+        console.error("Connection Failed:", error);
+        alert("Backend not reached. Is your server running on port 5000?");
+      }
+    });
+  });
+</script>
+</body></html>
